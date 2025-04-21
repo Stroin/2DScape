@@ -54,9 +54,9 @@ func _step_through(path: PackedVector2Array, idx: int):
 	# raycast sprawdza sciany
 	ray.target_position = delta
 	ray.force_raycast_update()
-	if ray.is_colliding():
-		moving = false
-		return
+	#if ray.is_colliding():
+		#moving = false
+		#return
 
 	anim.play(_dir_from_vector(delta))
 	var tw = get_tree().create_tween()

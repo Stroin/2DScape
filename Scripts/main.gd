@@ -18,7 +18,7 @@ func initialize_grid():
 	astar_grid.region        = Rect2i(0, 0, grid_size.x, grid_size.y)
 	astar_grid.cell_size     = cell_size
 	astar_grid.offset        = cell_size * 0.5
-	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
 	astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_OCTILE
 	astar_grid.update()
 	var tm =    $TileMapLayer 
@@ -48,19 +48,19 @@ func _input(event):
 		var raw_path: PackedVector2Array = astar_grid.get_point_path(start_cell, clicked_cell)
 		if raw_path.size() > 1:
 			player.call_deferred("follow_path", raw_path)
-
+#to wyjeb pod jezeli nie chcemy grida
 func _draw():
 	for x in range(grid_size.x + 1):
 		draw_line(
 			Vector2(x * cell_size.x, 0),
 			Vector2(x * cell_size.x, grid_size.y * cell_size.y),
-			Color(0.8, 0.8, 0.8),
-			2.0
+			Color(0.4, 0.4, 0.4),
+			1
 		)
 	for y in range(grid_size.y + 1):
 		draw_line(
 			Vector2(0, y * cell_size.y),
 			Vector2(grid_size.x * cell_size.x, y * cell_size.y),
-			Color(0.8, 0.8, 0.8),
-			2.0
+			Color(0.4, 0.4, 0.4),
+			1
 		)

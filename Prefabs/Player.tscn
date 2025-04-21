@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpmcoxrsg0fgq"]
+
+[ext_resource type="Script" path="res://Prefabs/player.gd" id="1_qs1ei"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51nbb"]
+
+[sub_resource type="Gradient" id="Gradient_d206o"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kumlv"]
+gradient = SubResource("Gradient_d206o")
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_qs1ei")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_51nbb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_kumlv")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

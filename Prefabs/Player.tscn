@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b0wysm6c2nqgj"]
 
-[ext_resource type="Texture2D" uid="uid://5gwse4alvf0" path="res://Assets/sokoban_character.png" id="1_cvt8y"]
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_itsbk"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_qs1ei"]
+[ext_resource type="Texture2D" uid="uid://5gwse4alvf0" path="res://Assets/sokoban_character.png" id="2_l1y8u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tia2a"]
 size = Vector2(32, 32)
@@ -79,10 +79,10 @@ _data = {
 }
 
 [node name="Player" type="Area2D"]
-script = ExtResource("1_itsbk")
+script = ExtResource("1_qs1ei")
 
 [node name="Sprite2d" type="Sprite2D" parent="."]
-texture = ExtResource("1_cvt8y")
+texture = ExtResource("2_l1y8u")
 hframes = 6
 vframes = 4
 frame = 6

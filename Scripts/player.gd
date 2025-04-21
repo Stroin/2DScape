@@ -11,7 +11,7 @@ var inputs := {
 	"down":  Vector2.DOWN
 }
 
-@onready var ray: RayCast2D = $RayCast2D
+@onready var ray: RayCast2D = $RayCast2d
 @onready var anim: AnimationPlayer =$AnimationPlayer
 
 func _ready():

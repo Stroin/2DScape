@@ -42,14 +42,14 @@ func _draw():
 		draw_line(
 			Vector2(x * cell_size.x, 0),
 			Vector2(x * cell_size.x, grid_size.y * cell_size.y),
-			Color(0.2, 0.2, 0.2),
+			Color(0.8, 0.8, 0.8),
 			2.0
 		)
 	for y in range(grid_size.y + 1):
 		draw_line(
 			Vector2(0, y * cell_size.y),
 			Vector2(grid_size.x * cell_size.x, y * cell_size.y),
-			Color(0.2, 0.2, 0.2),
+			Color(0.8, 0.8, 0.8),
 			2.0
 		)
 	# draw solid cells (walls)

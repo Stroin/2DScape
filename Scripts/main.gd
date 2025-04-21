@@ -15,12 +15,24 @@ func _ready():
 
 func initialize_grid():
 	grid_size = Vector2i(get_viewport_rect().size) / cell_size
-	astar_grid.size = grid_size
-	astar_grid.cell_size = cell_size
-	astar_grid.offset = cell_size * 0.5
+	astar_grid.region        = Rect2i(0, 0, grid_size.x, grid_size.y)
+	astar_grid.cell_size     = cell_size
+	astar_grid.offset        = cell_size * 0.5
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_OCTILE
 	astar_grid.update()
+	var tm =    $TileMapLayer 
+	var phys_layer = 0 
+	for x in range(grid_size.x):
+		for y in range(grid_size.y):
+			var cell = Vector2i(x, y)
+			var data: TileData = tm.get_cell_tile_data(cell)
+			if data and data.get_collision_polygons_count(phys_layer) > 0:
+				astar_grid.set_point_solid(cell, true)
+				
+	queue_redraw()
+
+
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
@@ -52,11 +64,3 @@ func _draw():
 			Color(0.8, 0.8, 0.8),
 			2.0
 		)
-	# draw solid cells (walls)
-	for x in range(grid_size.x):
-		for y in range(grid_size.y):
-			if astar_grid.is_point_solid(Vector2i(x, y)):
-				draw_rect(
-					Rect2(x * cell_size.x, y * cell_size.y, cell_size.x, cell_size.y),
-					Color(0.1, 0.1, 0.1)
-				)

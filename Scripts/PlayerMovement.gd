@@ -43,6 +43,7 @@ func _unhandled_input(event) -> void:
 # Single–tile keyboard movement
 # -----------------------------------------------------------------------
 func _move_grid(dir_vec: Vector2) -> void:
+	anim.play(_dir_from_vector(dir_vec))
 	ray.target_position = dir_vec * tile_size
 	ray.force_raycast_update()
 
@@ -52,7 +53,7 @@ func _move_grid(dir_vec: Vector2) -> void:
 		return
 
 	moving = true
-	anim.play(_dir_from_vector(dir_vec))
+
 
 	var tw = get_tree().create_tween()
 	tw.tween_property(

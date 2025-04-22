@@ -1,25 +1,35 @@
 extends Node2D
 class_name DebugGrid
 
-@export var grid_manager_path: NodePath   
+# --- exported paths -----------------------------------------------------
+@export var grid_manager_path : NodePath
 
-var grid_size: Vector2i
-var cell_size: Vector2i
+# --- cached references --------------------------------------------------
+var grid_size : Vector2i
+var cell_size : Vector2i
 
-func _ready():
-	var gm      = get_node(grid_manager_path)
-	grid_size   = gm.grid_size
-	cell_size   = gm.cell_size
+
+# -----------------------------------------------------------------------
+func _ready() -> void:
+	var gm := get_node(grid_manager_path)
+	grid_size = gm.grid_size
+	cell_size = gm.cell_size
+
 	gm.grid_initialized.connect(_on_grid_initialized)
 	queue_redraw()
 
-func _on_grid_initialized():
-	var gm    = get_node(grid_manager_path)
+
+# -----------------------------------------------------------------------
+func _on_grid_initialized() -> void:
+	var gm := get_node(grid_manager_path)
 	grid_size = gm.grid_size
 	cell_size = gm.cell_size
 	queue_redraw()
 
-func _draw():
+
+# -----------------------------------------------------------------------
+func _draw() -> void:
+	# vertical lines
 	for x in range(grid_size.x + 1):
 		draw_line(
 			Vector2(x * cell_size.x, 0),
@@ -27,6 +37,8 @@ func _draw():
 			Color(0.4, 0.4, 0.4),
 			1
 		)
+
+	# horizontal lines
 	for y in range(grid_size.y + 1):
 		draw_line(
 			Vector2(0, y * cell_size.y),

@@ -1,5 +1,5 @@
-# Player.gd
 extends Area2D
+class_name PlayerMovement       
 
 var animation_speed: float = 2.0
 var moving: bool = false
@@ -12,7 +12,7 @@ var inputs := {
 }
 
 @onready var ray: RayCast2D = $RayCast2d
-@onready var anim: AnimationPlayer =$AnimationPlayer
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	#snapuje do grida zeby player byl po srodku
@@ -51,9 +51,9 @@ func _step_through(path: PackedVector2Array, idx: int):
 	var target_pos: Vector2 = path[idx]
 	var delta = target_pos - position
 
-	# raycast sprawdza sciany
 	ray.target_position = delta
 	ray.force_raycast_update()
+	#to sprawdza czy raycast jebie sciane ale nie trzeba bo 
 	#if ray.is_colliding():
 		#moving = false
 		#return

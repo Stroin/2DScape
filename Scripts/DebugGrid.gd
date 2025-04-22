@@ -19,7 +19,6 @@ func _on_grid_initialized():
 	cell_size = gm.cell_size
 	queue_redraw()
 
-
 func _draw():
 	for x in range(grid_size.x + 1):
 		draw_line(

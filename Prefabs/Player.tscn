@@ -98,3 +98,5 @@ root_node = NodePath("../RayCast2d")
 libraries = {
 "": SubResource("AnimationLibrary_e3qh4")
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]

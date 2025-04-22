@@ -35,19 +35,24 @@ func initialize_grid():
 
 
 func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-		var clicked_cell = Vector2i(event.position) / cell_size
+	if event is InputEventMouseButton \
+	and event.button_index == MOUSE_BUTTON_RIGHT \
+	and event.pressed:
+		var world_pos: Vector2 = get_global_mouse_position()
+		var clicked_cell = Vector2i(
+			int(world_pos.x / cell_size.x),
+			int(world_pos.y / cell_size.y)
+		)
 		if not astar_grid.is_in_boundsv(clicked_cell):
 			return
-
-		var size2 = Vector2(cell_size.x, cell_size.y)
-		var offset = size2 * 0.5
-		var fp = ((player.position - offset) / size2).floor()
-		var start_cell = Vector2i(fp.x, fp.y)
-
-		var raw_path: PackedVector2Array = astar_grid.get_point_path(start_cell, clicked_cell)
+		var start_cell = Vector2i(
+			int(player.position.x / cell_size.x),
+			int(player.position.y / cell_size.y)
+		)
+		var raw_path = astar_grid.get_point_path(start_cell, clicked_cell)
 		if raw_path.size() > 1:
 			player.call_deferred("follow_path", raw_path)
+
 #to wyjeb pod jezeli nie chcemy grida
 func _draw():
 	for x in range(grid_size.x + 1):

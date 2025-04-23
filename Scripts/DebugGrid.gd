@@ -5,25 +5,35 @@ class_name DebugGrid
 @export var grid_manager_path : NodePath
 
 # --- cached references --------------------------------------------------
-var grid_size : Vector2i
-var cell_size : Vector2i
+var grid_size   : Vector2i
+var cell_size   : Vector2i
+var origin_cell : Vector2i
 
 
 # -----------------------------------------------------------------------
 func _ready() -> void:
 	var gm := get_node(grid_manager_path)
-	grid_size = gm.grid_size
-	cell_size = gm.cell_size
-
 	gm.grid_initialized.connect(_on_grid_initialized)
-	queue_redraw()
+	_on_grid_initialized()  # initial draw
 
 
 # -----------------------------------------------------------------------
 func _on_grid_initialized() -> void:
-	var gm := get_node(grid_manager_path)
-	grid_size = gm.grid_size
-	cell_size = gm.cell_size
+	var gm     := get_node(grid_manager_path)
+	var region : Rect2i = gm.astar_grid.region
+
+	# region.position is the top‐left cell in world‐space
+	origin_cell = region.position
+	# region.size is the number of cells in x/y
+	grid_size   = region.size
+	cell_size   = gm.cell_size
+
+	# offset this Node2D so that its (0,0) aligns with the region origin
+	position = Vector2(
+		origin_cell.x * cell_size.x,
+		origin_cell.y * cell_size.y
+	)
+
 	queue_redraw()
 
 

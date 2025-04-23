@@ -1,3 +1,4 @@
+# res://Scripts/DebugGrid.gd
 extends Node2D
 class_name DebugGrid
 
@@ -9,13 +10,11 @@ var grid_size   : Vector2i
 var cell_size   : Vector2i
 var origin_cell : Vector2i
 
-
 # -----------------------------------------------------------------------
 func _ready() -> void:
 	var gm := get_node(grid_manager_path)
 	gm.grid_initialized.connect(_on_grid_initialized)
 	_on_grid_initialized()  # initial draw
-
 
 # -----------------------------------------------------------------------
 func _on_grid_initialized() -> void:
@@ -35,7 +34,6 @@ func _on_grid_initialized() -> void:
 	)
 
 	queue_redraw()
-
 
 # -----------------------------------------------------------------------
 func _draw() -> void:

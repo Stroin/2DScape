@@ -60,7 +60,7 @@ texture_region_size = Vector2i(64, 64)
 7:5/0 = 0
 0:6/0 = 0
 0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-0:6/0/custom_data_0 = true
+0:6/0/custom_data_0 = "tree"
 1:6/0 = 0
 2:6/0 = 0
 3:6/0 = 0
@@ -72,8 +72,8 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_rqjml"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
-custom_data_layer_0/name = "is_tree"
-custom_data_layer_0/type = 1
+custom_data_layer_0/name = "resource_type"
+custom_data_layer_0/type = 4
 sources/1 = SubResource("TileSetAtlasSource_1c0mj")
 
 [node name="GameRoot" type="Node2D"]

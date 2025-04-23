@@ -14,15 +14,14 @@ var cell_size  : Vector2i
 var player  : Area2D
 var tilemap : TileMapLayer
 
-# -----------------------------------------------------------------------
 func _ready() -> void:
 	var gm = get_node(grid_manager_path) as GridManager
 	astar_grid = gm.astar_grid
 	cell_size  = gm.cell_size
 	tilemap    = gm.get_node("TileMapLayer") as TileMapLayer
 	player     = get_node(player_path)
+	print("🔧 PathfindingController ready. Player:", player, "TileMap:", tilemap)
 
-# -----------------------------------------------------------------------
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
@@ -34,12 +33,13 @@ func _input(event: InputEvent) -> void:
 			return
 
 		# --- resource detection -----------------------------------------
-		var td      : TileData = tilemap.get_cell_tile_data(clicked_cell)
-		var res_id  : String   = ""
+		var td     : TileData = tilemap.get_cell_tile_data(clicked_cell)
+		var res_id : String   = ""
 		if td:
 			res_id = td.get_custom_data("resource_type")
 
 		var is_resource = res_id != ""
+		print("PathfindingController: clicked_cell=", clicked_cell, " is_resource=", is_resource)
 
 		# --- decide target & look-at cell ------------------------------
 		var start_cell  : Vector2i = _world_to_cell(player.position)
@@ -49,41 +49,29 @@ func _input(event: InputEvent) -> void:
 		if is_resource:
 			look_at     = clicked_cell
 			target_cell = _nearest_reachable_neighbour(clicked_cell, start_cell)
+			print("PathfindingController: stand_spot=", target_cell)
 			if target_cell == Vector2i(-1, -1):
-				return   # no stand spot
+				return   # nowhere to stand
 
-		# --- path-find and send to player ------------------------------
 		var path = astar_grid.get_point_path(start_cell, target_cell)
+		print("PathfindingController: path=", path)
 		if path.size() > 0:
-			player.call_deferred("follow_path", path, look_at, res_id)
+			print("PathfindingController: calling follow_path()")
+			player.follow_path(path, look_at)
 
-# -----------------------------------------------------------------------
-# helpers
-# -----------------------------------------------------------------------
 func _world_to_cell(p: Vector2) -> Vector2i:
-	return Vector2i(
-		int(floor(p.x / cell_size.x)),
-		int(floor(p.y / cell_size.y))
-	)
+	return Vector2i(int(floor(p.x / cell_size.x)), int(floor(p.y / cell_size.y)))
 
 func _nearest_reachable_neighbour(tree: Vector2i, start: Vector2i) -> Vector2i:
-	var best_target : Vector2i = Vector2i(-1, -1)
-	var best_len    : int      = 1_000_000
-
-	var dirs = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
-	for d in dirs:
+	var best_target := Vector2i(-1, -1)
+	var best_len    := 1_000_000
+	for d in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
 		var adj = tree + d
-		if not astar_grid.is_in_boundsv(adj):
-			continue
-		if astar_grid.is_point_solid(adj):
-			continue
-
+		if not astar_grid.is_in_boundsv(adj): continue
+		if astar_grid.is_point_solid(adj): continue
 		var p = astar_grid.get_point_path(start, adj)
-		if p.size() == 0:
-			continue
-
+		if p.size() == 0: continue
 		if p.size() < best_len:
 			best_len    = p.size()
 			best_target = adj
-
 	return best_target

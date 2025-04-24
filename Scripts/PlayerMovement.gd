@@ -92,7 +92,7 @@ func _try_gather() -> void:
 	var timer = (Engine.get_main_loop() as SceneTree).create_timer(res.gather_time)
 	await timer.timeout
 
-	# swap the tile to this resource’s configured atlas coords
+	# swap the tile to this resource’s atlas coords
 	var source_id : int      = tm.get_cell_source_id(cell)
 	var old_atlas : Vector2i = tm.get_cell_atlas_coords(cell)
 	var new_atlas : Vector2i = res.atlas_coords
@@ -100,6 +100,11 @@ func _try_gather() -> void:
 	tm.update_internals()
 
 	print("PlayerMovement:", res.display_name, "gathered! tile swapped from", old_atlas, "to", new_atlas)
+
+	# — immediately clear the A* solid-flag so you can step on it —
+	var gm = tm.get_parent() as GridManager
+	if gm:
+		gm.astar_grid.set_point_solid(cell, false)
 
 	# spawn drop
 	if res.drop_scene:

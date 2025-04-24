@@ -1,3 +1,4 @@
+# res://Scripts/GridManager.gd
 extends Node2D
 class_name GridManager
 
@@ -15,8 +16,6 @@ var last_origin  # will hold the top-left cell of the last built region
 # --- signals ------------------------------------------------------------
 signal grid_initialized
 
-
-# -----------------------------------------------------------------------
 func _ready() -> void:
 	player = $"../Player"
 	# rebuild when window is resized
@@ -30,8 +29,6 @@ func _ready() -> void:
 	queue_redraw()
 	emit_signal("grid_initialized")
 
-
-# -----------------------------------------------------------------------
 func _process(delta: float) -> void:
 	var cam := get_viewport().get_camera_2d()
 	if not cam:
@@ -51,8 +48,6 @@ func _process(delta: float) -> void:
 		initialize_grid()
 		last_origin = origin_cell
 
-
-# -----------------------------------------------------------------------
 func initialize_grid() -> void:
 	var cam := get_viewport().get_camera_2d()
 	if not cam:
@@ -61,10 +56,10 @@ func initialize_grid() -> void:
 	# --- calculate region around camera -------------------------------
 	var vsz := get_viewport_rect().size
 	var world_size := vsz * cam.zoom
-	grid_size = Vector2i(
-		int(floor(world_size.x / cell_size.x)),
-		int(floor(world_size.y / cell_size.y))
-	)
+	# use ceil+1 to add a 1-cell buffer on each axis
+	var gx := int(ceil(world_size.x / cell_size.x)) + 1
+	var gy := int(ceil(world_size.y / cell_size.y)) + 1
+	grid_size = Vector2i(gx, gy)
 	
 	var origin_world := cam.global_position - world_size * 0.5
 	var origin_cell := Vector2i(

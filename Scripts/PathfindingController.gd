@@ -53,6 +53,12 @@ func _input(event: InputEvent) -> void:
 			if target_cell == Vector2i(-1, -1):
 				return   # nowhere to stand
 
+		# --- debug A* bounds & solidity ---------------------------------
+		print("A*: region=", astar_grid.region)
+		print("A*: start in bounds? ", astar_grid.is_in_boundsv(start_cell))
+		print("A*: target in bounds? ", astar_grid.is_in_boundsv(target_cell))
+		print("A*: target solid? ", astar_grid.is_point_solid(target_cell))
+
 		var path = astar_grid.get_point_path(start_cell, target_cell)
 		print("PathfindingController: path=", path)
 		if path.size() > 0:

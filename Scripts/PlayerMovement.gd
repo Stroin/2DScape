@@ -7,7 +7,8 @@ var animation_speed : float = 2.0     # tiles per second
 var tile_size       : int   = 64      # your tile dimension
 
 # --- exported node paths -----------------------------------------------
-@export var tilemap_path : NodePath = "../GridManager/TileMapLayer"
+@export var tilemap_path     : NodePath = "../GridManager/TileMapLayer"
+@export var swap_atlas_coords: Vector2i = Vector2i(2, 6)  # atlas coords to swap to
 
 # --- runtime state ------------------------------------------------------
 var moving        : bool     = false
@@ -92,14 +93,18 @@ func _try_gather() -> void:
 	var timer = (Engine.get_main_loop() as SceneTree).create_timer(res.gather_time)
 	await timer.timeout
 
-	# remove the tile
-	tm.erase_cell(cell)
-	print("PlayerMovement:", res.display_name, "gathered!")
+	# swap the tile to the user‐specified atlas coords
+	var source_id : int     = tm.get_cell_source_id(cell)
+	var old_atlas : Vector2i = tm.get_cell_atlas_coords(cell)
+	var new_atlas : Vector2i = swap_atlas_coords
+	tm.set_cell(cell, source_id, new_atlas)
+	tm.update_internals()
+
+	print("PlayerMovement:", res.display_name, "gathered! tile swapped from", old_atlas, "to", new_atlas)
 
 	# spawn drop
 	if res.drop_scene:
 		var drop = res.drop_scene.instantiate()
-		# use this node's tile_size instead of tm.tile_size
 		var global_cell_pos = tm.to_global(tm.map_to_local(cell))
 		drop.global_position = global_cell_pos + Vector2.ONE * tile_size * 0.5
 		tm.get_parent().add_child(drop)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bfex11xsdcm1o"]
+[gd_scene load_steps=12 format=4 uid="uid://bfex11xsdcm1o"]
 
 [ext_resource type="Script" path="res://Scripts/ResourceManager.gd" id="1_3eg65"]
 [ext_resource type="Script" path="res://Scripts/GridManager.gd" id="1_5oplc"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b0wysm6c2nqgj" path="res://Prefabs/Player.tscn" id="3_foxom"]
 [ext_resource type="Resource" uid="uid://cm41m3sc4m3u4" path="res://Resources/Tree.tres" id="3_ytho8"]
 [ext_resource type="Script" path="res://Scripts/PathfindingController.gd" id="4_h5y8m"]
+[ext_resource type="Script" path="res://Scripts/ResourceGatherer.gd" id="4_vcwke"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1c0mj"]
 texture = ExtResource("2_nw0ue")
@@ -84,6 +85,11 @@ sources/1 = SubResource("TileSetAtlasSource_1c0mj")
 [node name="ResourceManager" type="Node" parent="."]
 script = ExtResource("1_3eg65")
 resources = Array[ExtResource("2_7ox5i")]([ExtResource("3_ytho8")])
+
+[node name="ResourceGatherer" type="Node" parent="."]
+script = ExtResource("4_vcwke")
+player_path = NodePath("../Player")
+grid_manager_path = NodePath("../GridManager")
 
 [node name="GridManager" type="Node2D" parent="."]
 script = ExtResource("1_5oplc")

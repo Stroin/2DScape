@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://c0vpyhpeo0t7a"]
+
+[ext_resource type="Script" path="res://Scripts/Resource.gd" id="1_600o2"]
+
+[resource]
+script = ExtResource("1_600o2")
+id = "rock"
+display_name = "Rock"
+gather_time = 10.0
+drop_amount = 3
+atlas_coords = Vector2i(2, 6)

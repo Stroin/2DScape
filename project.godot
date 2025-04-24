@@ -17,3 +17,4 @@ config/icon="res://icon.png"
 [autoload]
 
 ResourceManage="*res://Scripts/ResourceManager.gd"
+Inv="*res://Scripts/Inventory.gd"

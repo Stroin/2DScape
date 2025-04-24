@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7i335316ahtm"]
+
+[ext_resource type="Script" path="res://Scripts/InventoryUI.gd" id="1_lpn7m"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_lpn7m")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

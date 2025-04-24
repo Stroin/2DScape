@@ -44,7 +44,11 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	grid_manager.astar_grid.set_point_solid(tcell, false)
 	print("ResourceGatherer: cleared solid flag in A* for", tcell)
 
-	# spawn drop
+	# — add resource into your inventory autoload (“Inv”) —
+	Inv.add_item(res.id, res.drop_amount)
+	print("ResourceGatherer: added %d x %s to inventory" % [res.drop_amount, res.id])
+
+	# (optional) still spawn a world-drop if you want to see it in-game
 	if res.drop_scene:
 		var drop = res.drop_scene.instantiate()
 		var global_cell_pos = tm.to_global(tm.map_to_local(tcell))

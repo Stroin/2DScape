@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=4 uid="uid://bfex11xsdcm1o"]
+[gd_scene load_steps=16 format=4 uid="uid://bfex11xsdcm1o"]
 
 [ext_resource type="Script" path="res://Scripts/ResourceManager.gd" id="1_3eg65"]
 [ext_resource type="Script" path="res://Scripts/GridManager.gd" id="1_5oplc"]
 [ext_resource type="Script" path="res://Scripts/Resource.gd" id="2_7ox5i"]
 [ext_resource type="Texture2D" uid="uid://ceipvi6so4xd8" path="res://Assets/[64x64] Dungeon Bricks Plain.png" id="2_nw0ue"]
+[ext_resource type="PackedScene" uid="uid://cud6fi3vvsobc" path="res://Scenes/StatsUI.tscn" id="2_uqgxw"]
 [ext_resource type="Script" path="res://Scripts/DebugGrid.gd" id="3_as78n"]
 [ext_resource type="PackedScene" uid="uid://b0wysm6c2nqgj" path="res://Prefabs/Player.tscn" id="3_foxom"]
 [ext_resource type="Resource" uid="uid://cm41m3sc4m3u4" path="res://Resources/Tree.tres" id="3_ytho8"]
@@ -88,6 +89,8 @@ sources/1 = SubResource("TileSetAtlasSource_1c0mj")
 [node name="GameRoot" type="Node2D"]
 
 [node name="Control" parent="." instance=ExtResource("11_11hoj")]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("2_uqgxw")]
 
 [node name="ResourceManager" type="Node" parent="."]
 script = ExtResource("1_3eg65")

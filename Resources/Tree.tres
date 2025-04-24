@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="ResourceData" load_steps=3 format=3 uid="uid://cm41m3sc4m3u4"]
+[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://cm41m3sc4m3u4"]
 
 [ext_resource type="Script" path="res://Scripts/Resource.gd" id="1_d7fve"]
-[ext_resource type="PackedScene" uid="uid://g0e1q8qw2t14" path="res://Prefabs/Tree.tscn" id="1_piksn"]
 
 [resource]
 script = ExtResource("1_d7fve")
 id = "tree"
 display_name = "Tree"
 gather_time = 4.0
-drop_scene = ExtResource("1_piksn")
-respawn_time = 5.0
 drop_amount = 1
+respawn_time = 5.0
+xp_reward = 1.0
+skill = "woodcutting"
 atlas_coords = Vector2i(2, 6)

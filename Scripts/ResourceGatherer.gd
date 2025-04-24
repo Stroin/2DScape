@@ -52,6 +52,11 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	Inv.add_item(res.id, res.drop_amount)
 	print("ResourceGatherer: added %d x %s to inventory" % [res.drop_amount, res.id])
 
+	# — grant XP based on the ResourceData fields —
+	if res.skill != "":
+		Stats.add_xp(res.skill, res.xp_reward)
+		print("ResourceGatherer: granted %.1f XP to %s" % [res.xp_reward, res.skill])
+
 	# (optional) still spawn a world-drop if you want to see it in-game
 	if res.drop_scene:
 		var drop = res.drop_scene.instantiate()

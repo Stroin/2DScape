@@ -18,3 +18,4 @@ config/icon="res://icon.png"
 
 ResourceManage="*res://Scripts/ResourceManager.gd"
 Inv="*res://Scripts/Inventory.gd"
+Stats="*res://Scripts/PlayerStats.gd"

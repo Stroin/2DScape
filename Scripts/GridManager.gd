@@ -16,6 +16,9 @@ var last_origin  # will hold the top-left cell of the last built region
 # --- signals ------------------------------------------------------------
 signal grid_initialized
 
+# --- respawn tracking ---------------------------------------------------
+# (we use one-shot timers to restore tiles after they’re gathered)
+
 func _ready() -> void:
 	player = $"../Player"
 	# rebuild when window is resized
@@ -86,3 +89,20 @@ func initialize_grid() -> void:
 
 	queue_redraw()
 	emit_signal("grid_initialized")
+
+# -----------------------------------------------------------------------
+# Schedule a tile to be restored after [delay] seconds,
+# and re-enable its A* solidity.
+func schedule_respawn(cell: Vector2i, source_id: int, atlas_coords: Vector2i, delay: float) -> void:
+	var timer = get_tree().create_timer(delay)
+	# bind our arguments into the Callable instead of using varray()
+	var cb = Callable(self, "_on_respawn_timeout").bind(cell, source_id, atlas_coords)
+	timer.connect("timeout", cb)
+	print("GridManager: scheduled respawn of resource at %s in %0.1f seconds" % [cell, delay])
+
+func _on_respawn_timeout(cell: Vector2i, source_id: int, atlas_coords: Vector2i) -> void:
+	var tm = $TileMapLayer
+	tm.set_cell(cell, source_id, atlas_coords)
+	tm.update_internals()
+	astar_grid.set_point_solid(cell, true)
+	print("GridManager: respawned resource at", cell)

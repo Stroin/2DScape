@@ -44,6 +44,10 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	grid_manager.astar_grid.set_point_solid(tcell, false)
 	print("ResourceGatherer: cleared solid flag in A* for", tcell)
 
+	# schedule respawn of this resource
+	grid_manager.schedule_respawn(tcell, source_id, old_atlas, res.respawn_time)
+	print("ResourceGatherer: scheduled respawn of %s at %s in %0.1fs" % [res.id, tcell, res.respawn_time])
+
 	# — add resource into your inventory autoload (“Inv”) —
 	Inv.add_item(res.id, res.drop_amount)
 	print("ResourceGatherer: added %d x %s to inventory" % [res.drop_amount, res.id])

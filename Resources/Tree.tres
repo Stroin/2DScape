@@ -9,5 +9,6 @@ id = "tree"
 display_name = "Tree"
 gather_time = 4.0
 drop_scene = ExtResource("1_piksn")
+respawn_time = 5.0
 drop_amount = 1
 atlas_coords = Vector2i(2, 6)

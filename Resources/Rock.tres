@@ -6,6 +6,7 @@
 script = ExtResource("1_600o2")
 id = "rock"
 display_name = "Rock"
-gather_time = 10.0
-drop_amount = 3
+gather_time = 4.0
+respawn_time = 30.0
+drop_amount = 1
 atlas_coords = Vector2i(2, 6)

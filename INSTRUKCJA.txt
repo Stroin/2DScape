@@ -1,0 +1,114 @@
+
+2. **Scenes involved**:
+   - **Main Scene**: Includes `GridManager`, `DebugGrid`, `PathfindingController`, `Player` (with `PlayerMovement`), and `ResourceGatherer` nodes.
+   - **TileMapLayer**: Child of `GridManager`, holds tiles with collision shapes and optional resource metadata.
+   - **ResourceManager**: A singleton node, holds all `ResourceData` assets.
+3. **NodePaths Configuration** (in Inspector):
+   - **DebugGrid.grid_manager_path** → The `GridManager` node.
+   - **PathfindingController.grid_manager_path** → The `GridManager` node.
+   - **PathfindingController.player_path** → The `Player` node (with `PlayerMovement`).
+   - **PlayerMovement.tilemap_path** → `../GridManager/TileMapLayer`.
+   - **ResourceGatherer.player_path** → The `PlayerMovement` node.
+   - **ResourceGatherer.grid_manager_path** → The `GridManager` node.
+
+---
+
+## 2. Script Overviews
+
+### 2.1 DebugGrid.gd
+- **Purpose**: Draws a grid overlay in the world showing current A* region.
+- **Key points**:
+  - Exports `grid_manager_path` to connect to `GridManager`.
+  - Listens to `grid_initialized` to update grid_size, cell_size, origin_cell.
+  - Overrides _draw() to render lines for each cell.
+
+### 2.2 GridManager.gd
+- **Purpose**: Maintains dynamic A* grid around the camera and marks solid cells.
+- **Key points**:
+  - Export cell_size (default 64×64).
+  - Uses an AStarGrid2D (astar_grid) with region, cell_size, diagonal mode, heuristic.
+  - Rebuilds grid on window resize and when camera moves into a new cell in _process().
+  - Populates astar_grid with solid points based on tile collisions.
+  - Emits grid_initialized after building.
+
+### 2.3 PathfindingController.gd
+- **Purpose**: Handles mouse clicks to compute A* paths and move the player.
+- **Key points**:
+  - Exported grid_manager_path & player_path.
+  - On left-click, converts world position to cell, checks resource custom_data.
+  - If clicking a resource, finds the nearest reachable neighbouring cell to stand and face.
+  - Prints debug info, computes path, and invokes player.follow_path(path, look_at).
+
+### 2.4 PlayerMovement.gd
+- **Purpose**: Animates and moves the player along a given path, then emits gather requests.
+- **Key points**:
+  - Exports tilemap_path, sets up tilemap on _ready().
+  - follow_path(path, resource_cell) steps through with tweens at animation_speed.
+  - Once at the final tile, faces toward resource cell and emits gather_requested(cell, ray).
+
+### 2.5 ResourceData (Resource.gd)
+- **Purpose**: Defines gatherable resource types.
+- **Key points**:
+  - Extends Resource with class_name ResourceData.
+  - Exports: id, display_name, gather_time, drop_scene, atlas_coords.
+
+### 2.6 ResourceGatherer.gd
+- **Purpose**: Performs gathering logic when the player arrives at a resource.
+- **Key points**:
+  - Listens to player.gather_requested, then uses TileQueries.get_resource_data_from_ray(ray).
+  - Waits for gather_time, swaps tile atlas coords, clears A* solid flag, spawns drop_scene.
+
+### 2.7 ResourceManager.gd
+- **Purpose**: Holds and provides access to all ResourceData assets.
+- **Key points**:
+  - Export array of resources (populate in Inspector with .tres files).
+  - Singleton pattern via _instance, lookup by get_resource(id).
+
+### 2.8 TileQueries.gd
+- **Purpose**: Casts a ray to detect resource under the cursor.
+- **Key points**:
+  - Static get_resource_data_from_ray(ray) returns a Dictionary with resource, cell, tilemap.
+  - Reads tile’s custom_data[`resource_type`], fetches ResourceData from ResourceManager.
+
+---
+
+## 3. Adding a New Gatherable Resource
+
+Follow these steps to introduce a new resource type (e.g. Gold Ore):
+
+1. **Create a ResourceData asset**:
+   - In FileSystem, right-click → New Resource → select ResourceData.
+   - Save e.g. as res://Resources/GoldOre.tres.
+   - In Inspector, configure:
+	 - id: gold_ore
+	 - display_name: Gold Ore
+	 - gather_time: e.g. 2.0 seconds
+	 - drop_scene: assign a PackedScene (e.g. GoldNugget.tscn)
+	 - atlas_coords: coordinates in your tileset atlas for the spent tile.
+
+2. **Assign tile metadata**:
+   - Open your TileSet resource used by TileMapLayer.
+   - Select the tile in the atlas that represents the raw resource.
+   - In Custom Data, add key `resource_type` with value matching your id (gold_ore).
+
+3. **Register in ResourceManager**:
+   - Select the ResourceManager node in your scene.
+   - In Inspector → resources array, click + and add your GoldOre.tres.
+
+4. **Place tiles in TileMap**:
+   - Use TileMapLayer to paint raw resource tiles on the map.
+   - Ensure collision shapes are configured so A* marks them as solid.
+
+5. **Test gathering**:
+   - Run the scene, click on a resource tile.
+   - Observe the player path, arrival, gathering delay, tile swap, and drop spawn.
+
+---
+
+## 4. Tips & Best Practices
+
+- Keep id strings consistent between ResourceData.id and tile resource_type.
+- Tune cell_size in GridManager and PlayerMovement to match your tile grid.
+- Use DebugGrid during development to visualize active A* regions.
+- Log outputs in scripts are prefixed (e.g. 🔧 or script name) to filter in the Debugger.
+- Resizing window or moving camera beyond cell boundaries triggers grid rebuilds automatically.

@@ -10,3 +10,6 @@ class_name ResourceData
 @export var gather_time: float = 1.0
 # PackedScene to instance when the resource is gathered (e.g. wood log, ore chunk)
 @export var drop_scene: PackedScene
+# —————————————————————————————————————————————————————————————————————————————
+# Atlas coords (in your TileSet’s atlas) to swap this resource’s tile to when gathered
+@export var atlas_coords: Vector2i = Vector2i(0, 0)

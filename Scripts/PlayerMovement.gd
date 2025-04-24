@@ -7,8 +7,7 @@ var animation_speed : float = 2.0     # tiles per second
 var tile_size       : int   = 64      # your tile dimension
 
 # --- exported node paths -----------------------------------------------
-@export var tilemap_path     : NodePath = "../GridManager/TileMapLayer"
-@export var swap_atlas_coords: Vector2i = Vector2i(2, 6)  # atlas coords to swap to
+@export var tilemap_path: NodePath = "../GridManager/TileMapLayer"
 
 # --- runtime state ------------------------------------------------------
 var moving        : bool     = false
@@ -93,10 +92,10 @@ func _try_gather() -> void:
 	var timer = (Engine.get_main_loop() as SceneTree).create_timer(res.gather_time)
 	await timer.timeout
 
-	# swap the tile to the user‐specified atlas coords
-	var source_id : int     = tm.get_cell_source_id(cell)
+	# swap the tile to this resource’s configured atlas coords
+	var source_id : int      = tm.get_cell_source_id(cell)
 	var old_atlas : Vector2i = tm.get_cell_atlas_coords(cell)
-	var new_atlas : Vector2i = swap_atlas_coords
+	var new_atlas : Vector2i = res.atlas_coords
 	tm.set_cell(cell, source_id, new_atlas)
 	tm.update_internals()
 

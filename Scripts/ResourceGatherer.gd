@@ -26,7 +26,7 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	var res   : ResourceData  = info["resource"]
 	var tcell : Vector2i      = info["cell"]
 	var tm    : TileMapLayer  = info["tilemap"]
-	print("ResourceGatherer: found resource", res.id, "at", tcell, "- gathering will take", res.gather_time, "s")
+	print("ResourceGatherer: found resource", res.id, "→ will drop", res.drop_item_id, "- gathering takes", res.gather_time, "s")
 
 	# --- require proper tool --------------------------------------------
 	match res.skill:
@@ -61,9 +61,12 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	grid_manager.schedule_respawn(tcell, source_id, old_atlas, res.respawn_time)
 	print("ResourceGatherer: scheduled respawn of %s at %s in %0.1fs" % [res.id, tcell, res.respawn_time])
 
-	# — add resource into your inventory autoload (“Inv”) —
-	Inv.add_item(res.id, res.drop_amount)
-	print("ResourceGatherer: added %d x %s to inventory" % [res.drop_amount, res.id])
+	# — add the configured drop item into your inventory Autoload (“Inv”) —
+	if res.drop_item_id != "":
+		Inv.add_item(res.drop_item_id, res.drop_amount)
+		print("ResourceGatherer: added %d x %s to inventory" % [res.drop_amount, res.drop_item_id])
+	else:
+		push_warning("ResourceGatherer: ResourceData.drop_item_id not set for %s" % res.id)
 
 	# — grant XP based on the ResourceData fields —
 	if res.skill != "":

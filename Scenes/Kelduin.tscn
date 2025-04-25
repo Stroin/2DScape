@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bfex11xsdcm1o"]
+[gd_scene load_steps=26 format=4 uid="uid://bfex11xsdcm1o"]
 
 [ext_resource type="Script" path="res://Scripts/ResourceManager.gd" id="1_3eg65"]
 [ext_resource type="Script" path="res://Scripts/GridManager.gd" id="1_5oplc"]
@@ -12,9 +12,17 @@
 [ext_resource type="Script" path="res://Scripts/ResourceGatherer.gd" id="4_vcwke"]
 [ext_resource type="Resource" uid="uid://c0vpyhpeo0t7a" path="res://Resources/Rock.tres" id="5_fkw11"]
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="5_gmxu7"]
+[ext_resource type="Script" path="res://Scripts/IngredientManager.gd" id="8_53sh7"]
+[ext_resource type="Script" path="res://Scripts/IngredientData.gd" id="9_8vw6c"]
+[ext_resource type="Resource" uid="uid://d3sjf4kmt3vj6" path="res://Ingredients/Feather.tres" id="10_h1jnh"]
 [ext_resource type="PackedScene" uid="uid://b7i335316ahtm" path="res://Prefabs/InventoryUI.tscn" id="11_11hoj"]
+[ext_resource type="Resource" uid="uid://u8532inls75r" path="res://Ingredients/Flux.tres" id="11_mrhtq"]
+[ext_resource type="Resource" uid="uid://c7agdjkdmsd16" path="res://Ingredients/RawChicken.tres" id="12_yncdg"]
+[ext_resource type="Resource" uid="uid://tjsktughef73" path="res://Ingredients/Stone.tres" id="13_b38iq"]
+[ext_resource type="Resource" uid="uid://b7s0huaipm36" path="res://Ingredients/String.tres" id="14_4fcud"]
 [ext_resource type="PackedScene" uid="uid://dq0uafko7jv7q" path="res://Prefabs/Axe.tscn" id="14_vpsyp"]
 [ext_resource type="PackedScene" uid="uid://dbhkow4p3imiv" path="res://Prefabs/Pickaxe.tscn" id="15_7colk"]
+[ext_resource type="Resource" uid="uid://b0u6cioxqmgkv" path="res://Ingredients/Wood.tres" id="15_timd3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1c0mj"]
 texture = ExtResource("2_nw0ue")
@@ -102,6 +110,10 @@ resources = Array[ExtResource("2_7ox5i")]([ExtResource("3_ytho8"), ExtResource("
 script = ExtResource("4_vcwke")
 player_path = NodePath("../Player")
 grid_manager_path = NodePath("../GridManager")
+
+[node name="IngredientManager" type="Node" parent="."]
+script = ExtResource("8_53sh7")
+ingredients = Array[ExtResource("9_8vw6c")]([ExtResource("10_h1jnh"), ExtResource("11_mrhtq"), ExtResource("12_yncdg"), ExtResource("13_b38iq"), ExtResource("14_4fcud"), ExtResource("15_timd3")])
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("5_gmxu7")

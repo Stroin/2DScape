@@ -10,7 +10,10 @@ class_name ResourceData
 @export var gather_time: float = 1.0
 # PackedScene to instance when the resource is gathered (e.g. wood log, ore chunk)
 @export var drop_scene: PackedScene
-# Amount to give the player when gathered
+# —————————————————————————————————————————————————————————————————————————————
+# What inventory item this resource yields (must match your Inventory key)
+@export var drop_item_id: String = ""
+# How many of that item to give the player
 @export var drop_amount: int = 1
 # Time in seconds before this resource reappears
 @export var respawn_time: float = 30.0

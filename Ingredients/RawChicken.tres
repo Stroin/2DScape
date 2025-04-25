@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=2 format=3 uid="uid://c7agdjkdmsd16"]
+
+[ext_resource type="Script" path="res://Scripts/IngredientData.gd" id="1_u8wrt"]
+
+[resource]
+script = ExtResource("1_u8wrt")
+id = "rawchicken"
+display_name = "Raw Chicken"
+description = ""
+max_stack = 99

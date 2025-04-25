@@ -7,6 +7,7 @@ script = ExtResource("1_600o2")
 id = "rock"
 display_name = "Rock"
 gather_time = 4.0
+drop_item_id = "stone"
 drop_amount = 1
 respawn_time = 30.0
 xp_reward = 1.0

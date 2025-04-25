@@ -28,6 +28,19 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	var tm    : TileMapLayer  = info["tilemap"]
 	print("ResourceGatherer: found resource", res.id, "at", tcell, "- gathering will take", res.gather_time, "s")
 
+	# --- require proper tool --------------------------------------------
+	match res.skill:
+		"woodcutting":
+			if not Inv.get_items().has("axe"):
+				print("ResourceGatherer: You need an axe to cut this resource!")
+				return
+		"mining":
+			if not Inv.get_items().has("pickaxe"):
+				print("ResourceGatherer: You need a pickaxe to mine this resource!")
+				return
+		_:
+			pass  # no tool required
+
 	var timer = get_tree().create_timer(res.gather_time)
 	await timer.timeout
 	print("ResourceGatherer:", res.id, "gather timer complete for", tcell)

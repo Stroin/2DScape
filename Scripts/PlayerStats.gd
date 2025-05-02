@@ -3,15 +3,16 @@
 extends Node
 class_name PlayerStats
 
-# —————————————————————————————————————————————————————————————————————————————
-
 # Maximum level any skill can reach
 @export var max_level: int = 50
+
+# Central list of all valid skill IDs
+@export var available_skills: Array[String] = ["woodcutting", "mining"]
 
 # Emitted whenever any skill levels up: (skill_name, new_level)
 signal skill_leveled(skill_name: String, level: int)
 
-# Internal data per skill
+# Internal data per skill: level, current XP, XP needed for next level
 var skills: Dictionary = {
 	"woodcutting": {"level": 1, "xp": 0.0, "xp_to_next": 10.0},
 	"mining":       {"level": 1, "xp": 0.0, "xp_to_next": 10.0},

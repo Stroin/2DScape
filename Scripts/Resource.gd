@@ -30,8 +30,11 @@ class_name ResourceData
 # Which skill to apply that XP to (e.g. "woodcutting", "mining")
 @export var skill: String = ""
 
-# Atlas coords (in your TileSet’s atlas) to swap this resource’s tile to when gathered
-@export var atlas_coords: Vector2i = Vector2i(0, 0)
+# Which tool is required to gather this resource (match a ToolData.id)
+@export var required_tool: String = ""
 
 # how much tool durability this resource costs
 @export var tool_durability_cost: int = 1
+
+# Atlas coords (in your TileSet’s atlas) to swap this resource’s tile to when gathered
+@export var atlas_coords: Vector2i = Vector2i(0, 0)

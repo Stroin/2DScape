@@ -93,7 +93,7 @@ sources/1 = SubResource("TileSetAtlasSource_1c0mj")
 script = ExtResource("4_vcwke")
 player_path = NodePath("../Player")
 grid_manager_path = NodePath("../GridManager")
-tile_size = null
+spawn_world_drops = false
 
 [node name="GridManager" type="Node2D" parent="."]
 script = ExtResource("1_5oplc")

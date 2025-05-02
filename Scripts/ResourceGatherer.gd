@@ -4,9 +4,10 @@ extends Node
 class_name ResourceGatherer
 
 # --- exported node paths -----------------------------------------------
-@export var player_path       : NodePath
-@export var grid_manager_path : NodePath
-@export var tile_size         : int     = 64   # must match PlayerMovement.tile_size
+@export var player_path        : NodePath
+@export var grid_manager_path  : NodePath
+@export var tile_size          : int    = 64  # must match PlayerMovement.tile_size
+@export var spawn_world_drops  : bool   = true
 
 var gather_cancelled: bool = false
 
@@ -32,17 +33,10 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	print("ResourceGatherer: found resource", res.id, "→ will drop", res.drop_item_id, "- gathering takes", res.gather_time, "s")
 
 	# --- require proper tool --------------------------------------------
-	match res.skill:
-		"woodcutting":
-			if not Inv.get_items().has("axe"):
-				print("ResourceGatherer: You need an axe to cut this resource!")
-				return
-		"mining":
-			if not Inv.get_items().has("pickaxe"):
-				print("ResourceGatherer: You need a pickaxe to mine this resource!")
-				return
-		_:
-			pass  # no tool required
+	if res.required_tool != "":
+		if not Inv.get_items().has(res.required_tool):
+			print("ResourceGatherer: You need a %s to gather this resource!" % res.required_tool)
+			return
 
 	gather_cancelled = false
 	# gathering timer
@@ -51,14 +45,11 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	if gather_cancelled:
 		print("ResourceGatherer: gathering cancelled due to movement")
 		return
+
 	print("ResourceGatherer:", res.id, "gather timer complete for", tcell)
 
 	# drain tool durability after successful gather
-	var used_tool: String
-	if res.skill == "woodcutting":
-		used_tool = "axe"
-	else:
-		used_tool = "pickaxe"
+	var used_tool: String = res.required_tool
 	ToolManager._instance.reduce_durability(used_tool, res.tool_durability_cost)
 
 	# swap tile atlas coords
@@ -88,12 +79,13 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 		Stats.add_xp(res.skill, res.xp_reward)
 		print("ResourceGatherer: granted %.1f XP to %s" % [res.xp_reward, res.skill])
 
-	# (optional) still spawn a world-drop if you want to see it in-game
-	if res.drop_scene:
+	# optionally spawn a world-drop if enabled
+	if spawn_world_drops and res.drop_scene:
 		var drop = res.drop_scene.instantiate()
 		var global_cell_pos = tm.to_global(tm.map_to_local(tcell))
 		drop.global_position = global_cell_pos + Vector2.ONE * tile_size * 0.5
 		tm.get_parent().add_child(drop)
+		print("ResourceGatherer: spawned drop for", res.id, "at", global_cell_pos)
 
 func _on_player_moved() -> void:
 	gather_cancelled = true

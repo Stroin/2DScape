@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://c0vpyhpeo0t7a"]
 
-[ext_resource type="Script" path="res://Scripts/Resource.gd" id="1_600o2"]
+[ext_resource type="Script" path="res://Scripts/Resource.gd" id="1_u3ekl"]
 
 [resource]
-script = ExtResource("1_600o2")
+script = ExtResource("1_u3ekl")
 id = "rock"
 display_name = "Rock"
 gather_time = 4.0
@@ -12,4 +12,6 @@ drop_amount = 1
 respawn_time = 30.0
 xp_reward = 1.0
 skill = "mining"
+required_tool = "pickaxe"
+tool_durability_cost = 1
 atlas_coords = Vector2i(2, 6)

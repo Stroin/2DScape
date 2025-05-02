@@ -16,8 +16,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-IngrManager="*res://Prefabs/ingredient_manager.tscn"
-Inv="*res://Prefabs/inventory.tscn"
-Stats="*res://Prefabs/player_stats.tscn"
-ResourceMngr="*res://Prefabs/resource_manager.tscn"
-ToolManage="*res://Prefabs/tool_manager.tscn"
+IngrManager="*res://Prefabs/Autoloads/ingredient_manager.tscn"
+Inv="*res://Prefabs/Autoloads/inventory.tscn"
+Stats="*res://Prefabs/Autoloads/player_stats.tscn"
+ResourceMngr="*res://Prefabs/Autoloads/resource_manager.tscn"
+ToolManage="*res://Prefabs/Autoloads/tool_manager.tscn"

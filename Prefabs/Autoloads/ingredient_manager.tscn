@@ -1,0 +1,14 @@
+[gd_scene load_steps=9 format=3 uid="uid://cmiiouksryy74"]
+
+[ext_resource type="Script" path="res://Scripts/IngredientManager.gd" id="1_2n0xn"]
+[ext_resource type="Script" path="res://Scripts/IngredientData.gd" id="2_rfxt2"]
+[ext_resource type="Resource" uid="uid://d3sjf4kmt3vj6" path="res://Prefabs/Ingredients/Feather.tres" id="3_ew7do"]
+[ext_resource type="Resource" uid="uid://u8532inls75r" path="res://Prefabs/Ingredients/Flux.tres" id="4_fl25q"]
+[ext_resource type="Resource" uid="uid://c7agdjkdmsd16" path="res://Prefabs/Ingredients/RawChicken.tres" id="5_rwe6h"]
+[ext_resource type="Resource" uid="uid://tjsktughef73" path="res://Prefabs/Ingredients/Stone.tres" id="6_d5gwh"]
+[ext_resource type="Resource" uid="uid://b7s0huaipm36" path="res://Prefabs/Ingredients/String.tres" id="7_772q6"]
+[ext_resource type="Resource" uid="uid://b0u6cioxqmgkv" path="res://Prefabs/Ingredients/Wood.tres" id="8_opfpt"]
+
+[node name="IngredientManager" type="Node"]
+script = ExtResource("1_2n0xn")
+ingredients = Array[ExtResource("2_rfxt2")]([ExtResource("3_ew7do"), ExtResource("4_fl25q"), ExtResource("5_rwe6h"), ExtResource("6_d5gwh"), ExtResource("7_772q6"), ExtResource("8_opfpt")])

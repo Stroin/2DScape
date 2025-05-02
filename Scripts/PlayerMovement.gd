@@ -4,6 +4,7 @@ extends Area2D
 class_name PlayerMovement
 
 signal gather_requested(cell: Vector2i, ray: RayCast2D)
+signal movement_started
 
 # --- tuning -------------------------------------------------------------
 var animation_speed : float = 2.0     # tiles per second
@@ -39,6 +40,7 @@ func follow_path(path: PackedVector2Array, resource_cell: Vector2i = Vector2i(-1
 			emit_signal("gather_requested", _look_at_cell, ray)
 		return
 
+	emit_signal("movement_started")
 	moving = true
 	_step_through(path, 1)
 

@@ -8,6 +8,8 @@ class_name ResourceGatherer
 @export var grid_manager_path : NodePath
 @export var tile_size         : int     = 64   # must match PlayerMovement.tile_size
 
+var gather_cancelled: bool = false
+
 # --- references ---------------------------------------------------------
 const TileQueries = preload("res://Scripts/TileQueries.gd")
 @onready var player       : PlayerMovement = get_node(player_path) as PlayerMovement
@@ -15,6 +17,7 @@ const TileQueries = preload("res://Scripts/TileQueries.gd")
 
 func _ready() -> void:
 	player.gather_requested.connect(_on_gather_requested)
+	player.movement_started.connect(_on_player_moved)
 
 func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	# try to find resource under the player's ray
@@ -41,9 +44,13 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 		_:
 			pass  # no tool required
 
+	gather_cancelled = false
 	# gathering timer
 	var timer = get_tree().create_timer(res.gather_time)
 	await timer.timeout
+	if gather_cancelled:
+		print("ResourceGatherer: gathering cancelled due to movement")
+		return
 	print("ResourceGatherer:", res.id, "gather timer complete for", tcell)
 
 	# swap tile atlas coords
@@ -80,3 +87,6 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 		drop.global_position = global_cell_pos + Vector2.ONE * tile_size * 0.5
 		tm.get_parent().add_child(drop)
 		print("ResourceGatherer: spawned drop for", res.id, "at", global_cell_pos)
+
+func _on_player_moved() -> void:
+	gather_cancelled = true

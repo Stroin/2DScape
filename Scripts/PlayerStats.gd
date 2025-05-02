@@ -7,7 +7,7 @@ class_name PlayerStats
 @export var max_level: int = 50
 
 # Central list of all valid skill IDs
-@export var available_skills: Array[String] = ["woodcutting", "mining"]
+@export var available_skills: Array[String] = ["woodcutting", "mining", "fishing"]
 
 # Emitted whenever any skill levels up: (skill_name, new_level)
 signal skill_leveled(skill_name: String, level: int)
@@ -16,6 +16,7 @@ signal skill_leveled(skill_name: String, level: int)
 var skills: Dictionary = {
 	"woodcutting": {"level": 1, "xp": 0.0, "xp_to_next": 10.0},
 	"mining":       {"level": 1, "xp": 0.0, "xp_to_next": 10.0},
+	"fishing":      {"level": 1, "xp": 0.0, "xp_to_next": 10.0},
 }
 
 func add_xp(skill_name: String, amount: float = 1.0) -> void:

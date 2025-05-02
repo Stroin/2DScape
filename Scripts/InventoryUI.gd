@@ -11,6 +11,18 @@ func _process(delta: float) -> void:
 	var stacks = Inv.get_stacks()
 	var txt := "Inventory:\n"
 	for item_id in stacks.keys():
-		for s in stacks[item_id]:
-			txt += "%s: %d\n" % [item_id, s]
+		# determine human-friendly name
+		var display_name = item_id
+		var ing = IngredientManager.get_ingredient(item_id)
+		if ing != null:
+			display_name = ing.display_name
+		else:
+			# check if it's a tool
+			if ToolManager._instance != null:
+				var stats = ToolManager._instance.get_tool_stats(item_id)
+				if stats.has("display_name"):
+					display_name = stats["display_name"]
+		# list each stack separately
+		for count in stacks[item_id]:
+			txt += "%s: %d\n" % [display_name, count]
 	label.text = txt

@@ -20,7 +20,6 @@ static func get_ingredient(id: String) -> IngredientData:
 	for ing in IngredientManager._instance.ingredients:
 		if ing.id == id:
 			return ing
-	push_warning("IngredientManager: no ingredient with id '%s'" % id)
 	return null
 
 # Return all known ingredient IDs (for iterating, UIs, etc.)

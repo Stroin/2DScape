@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=2 format=3 uid="uid://ddjqohrxftcrq"]
+
+[ext_resource type="Script" path="res://Scripts/IngredientData.gd" id="1_e2eks"]
+
+[resource]
+script = ExtResource("1_e2eks")
+id = "cooked_fish"
+display_name = "Cooked FIsh"
+description = ""
+max_stack = 99

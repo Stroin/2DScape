@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://sdwsdatdbfop"]
+
+[ext_resource type="Script" path="res://Scripts/Resource.gd" id="1_20s31"]
+
+[resource]
+script = ExtResource("1_20s31")
+id = "fish_spot"
+display_name = "Fish Spot"
+gather_time = 2.5
+drop_item_id = "raw_fish"
+drop_amount = 1
+respawn_time = 5.0
+xp_reward = 1.0
+skill = "fishing"
+required_tool = "fishingrod"
+required_level = 0
+tool_durability_cost = 1
+atlas_coords = Vector2i(0, 11)

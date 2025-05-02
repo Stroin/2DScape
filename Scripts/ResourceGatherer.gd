@@ -53,6 +53,14 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 		return
 	print("ResourceGatherer:", res.id, "gather timer complete for", tcell)
 
+	# drain tool durability after successful gather
+	var used_tool: String
+	if res.skill == "woodcutting":
+		used_tool = "axe"
+	else:
+		used_tool = "pickaxe"
+	ToolManager._instance.reduce_durability(used_tool, res.tool_durability_cost)
+
 	# swap tile atlas coords
 	var source_id : int      = tm.get_cell_source_id(tcell)
 	var old_atlas : Vector2i = tm.get_cell_atlas_coords(tcell)
@@ -86,7 +94,6 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 		var global_cell_pos = tm.to_global(tm.map_to_local(tcell))
 		drop.global_position = global_cell_pos + Vector2.ONE * tile_size * 0.5
 		tm.get_parent().add_child(drop)
-		print("ResourceGatherer: spawned drop for", res.id, "at", global_cell_pos)
 
 func _on_player_moved() -> void:
 	gather_cancelled = true

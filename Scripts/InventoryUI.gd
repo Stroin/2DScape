@@ -1,10 +1,10 @@
 # res://Scripts/InventoryUI.gd
 
-extends CanvasLayer
+extends Control
 class_name InventoryUI
 
 # Automatically finds your global inventory autoload (named "Inv")
-@onready var label: Label = $Label
+@onready var label: Label = $CanvasLayer/Panel/MarginContainer/VBoxContainer/Label
 
 func _process(delta: float) -> void:
 	# pull the current stacks every frame and rebuild the text

@@ -8,4 +8,7 @@ id = "axe"
 display_name = "Axe"
 damage = 1
 durability = 100
-recipe = {}
+recipe = {
+"stone": 1,
+"wood": 2
+}

@@ -8,4 +8,6 @@ id = "fishingrod"
 display_name = "Fishing Rod"
 damage = 0
 durability = 50
-recipe = {}
+recipe = {
+"stone": 6
+}

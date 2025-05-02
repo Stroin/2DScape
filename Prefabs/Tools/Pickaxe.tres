@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="ToolData" load_steps=2 format=3 uid="uid://uxnn7epmodyj"]
 
-[ext_resource type="Script" path="res://Scripts/ToolData.gd" id="1_0ext2"]
+[ext_resource type="Script" path="res://Scripts/ToolData.gd" id="1_067t6"]
 
 [resource]
-script = ExtResource("1_0ext2")
+script = ExtResource("1_067t6")
 id = "pickaxe"
 display_name = "Pickaxe"
 damage = 1
 durability = 100
-recipe = {}
+recipe = {
+"wood": 3
+}

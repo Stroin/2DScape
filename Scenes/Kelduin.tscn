@@ -152,11 +152,11 @@ sources/0 = SubResource("TileSetAtlasSource_weftp")
 
 [node name="GameRoot" type="Node2D"]
 
-[node name="Control" parent="." instance=ExtResource("11_11hoj")]
+[node name="InventoryUI" parent="." instance=ExtResource("11_11hoj")]
 
-[node name="CanvasLayer" parent="." instance=ExtResource("2_uqgxw")]
+[node name="StatsUI" parent="." instance=ExtResource("2_uqgxw")]
 
-[node name="Control2" parent="." instance=ExtResource("3_lw3ad")]
+[node name="CraftingUI" parent="." instance=ExtResource("3_lw3ad")]
 pathfinding_controller_path = NodePath("../PathfindingController")
 
 [node name="ResourceGatherer" type="Node" parent="."]

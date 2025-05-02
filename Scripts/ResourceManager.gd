@@ -1,4 +1,5 @@
 # res://Scripts/ResourceManager.gd
+
 extends Node
 class_name ResourceManager
 

@@ -1,4 +1,5 @@
 # res://Scripts/IngredientManager.gd
+
 extends Node
 class_name IngredientManager
 

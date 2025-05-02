@@ -1,15 +1,17 @@
 # res://Scripts/PlayerStats.gd
+
 extends Node
 class_name PlayerStats
 
 # —————————————————————————————————————————————————————————————————————————————
+
 # Maximum level any skill can reach
 @export var max_level: int = 50
 
 # Emitted whenever any skill levels up: (skill_name, new_level)
 signal skill_leveled(skill_name: String, level: int)
 
-# Internal data per skill: level, current XP, XP needed for next level
+# Internal data per skill
 var skills: Dictionary = {
 	"woodcutting": {"level": 1, "xp": 0.0, "xp_to_next": 10.0},
 	"mining":       {"level": 1, "xp": 0.0, "xp_to_next": 10.0},
@@ -35,7 +37,7 @@ func add_xp(skill_name: String, amount: float = 1.0) -> void:
 	while data.xp >= data.xp_to_next and data.level < max_level:
 		data.xp -= data.xp_to_next
 		data.level += 1
-		data.xp_to_next *= 1.1  # increase next‐level XP by 10%
+		data.xp_to_next *= 1.1  # increase next-level XP by 10%
 		print("PlayerStats: %s reached level %d (next at %.1f XP)" %
 			[skill_name, data.level, data.xp_to_next])
 		emit_signal("skill_leveled", skill_name, data.level)

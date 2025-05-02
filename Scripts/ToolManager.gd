@@ -1,4 +1,5 @@
 # res://Scripts/ToolManager.gd
+
 extends Node
 class_name ToolManager
 

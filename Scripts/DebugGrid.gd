@@ -1,4 +1,5 @@
 # res://Scripts/DebugGrid.gd
+
 extends Node2D
 class_name DebugGrid
 
@@ -10,18 +11,16 @@ var grid_size   : Vector2i
 var cell_size   : Vector2i
 var origin_cell : Vector2i
 
-# -----------------------------------------------------------------------
 func _ready() -> void:
 	var gm := get_node(grid_manager_path)
 	gm.grid_initialized.connect(_on_grid_initialized)
 	_on_grid_initialized()  # initial draw
 
-# -----------------------------------------------------------------------
 func _on_grid_initialized() -> void:
 	var gm     := get_node(grid_manager_path)
 	var region : Rect2i = gm.astar_grid.region
 
-	# region.position is the top‐left cell in world‐space
+	# region.position is the top-left cell in world-space
 	origin_cell = region.position
 	# region.size is the number of cells in x/y
 	grid_size   = region.size
@@ -35,7 +34,6 @@ func _on_grid_initialized() -> void:
 
 	queue_redraw()
 
-# -----------------------------------------------------------------------
 func _draw() -> void:
 	# vertical lines
 	for x in range(grid_size.x + 1):

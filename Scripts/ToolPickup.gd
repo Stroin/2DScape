@@ -1,9 +1,11 @@
 # res://Scripts/ToolPickup.gd
+
 extends Area2D
 class_name ToolPickup
 
 # — which tool this is (must match your inventory key, e.g. "axe" or "pickaxe")
 @export var tool_id: String = ""
+
 # — how many to give when picked up
 @export var tool_amount: int = 1
 

@@ -1,4 +1,5 @@
 # res://Scripts/InventoryUI.gd
+
 extends CanvasLayer
 class_name InventoryUI
 

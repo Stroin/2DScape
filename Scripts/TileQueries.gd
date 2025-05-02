@@ -1,11 +1,12 @@
 # res://Scripts/TileQueries.gd
+
 extends Node
 class_name TileQueries
 
 # Queries the ray for a resource, returning a Dictionary with:
-#   "resource": ResourceData
-#   "cell":     Vector2i
-#   "tilemap":  TileMapLayer
+#  "resource": ResourceData
+#  "cell":     Vector2i
+#  "tilemap":  TileMapLayer
 # Or an empty Dictionary if nothing valid.
 static func get_resource_data_from_ray(ray: RayCast2D) -> Dictionary:
 	var info: Dictionary = {}  # explicit Dictionary
@@ -13,17 +14,14 @@ static func get_resource_data_from_ray(ray: RayCast2D) -> Dictionary:
 		return info
 
 	var collider = ray.get_collider()
-	print_debug("TileQueries: collider =", collider)
 
 	if collider is TileMapLayer:
 		var hit_pos: Vector2 = ray.get_collision_point() - ray.get_collision_normal() * 0.1
 		var cell: Vector2i = collider.local_to_map(collider.to_local(hit_pos))
 		var td: TileData = collider.get_cell_tile_data(cell)
-		print_debug("TileQueries: hit cell", cell, "td=", td)
 
 		if td:
 			var res_id = td.get_custom_data("resource_type")
-			print_debug("TileQueries: custom_data resource_type =", res_id)
 
 			if typeof(res_id) == TYPE_STRING and res_id != "":
 				var res: ResourceData = ResourceManager.get_resource(res_id)

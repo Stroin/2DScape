@@ -1,4 +1,5 @@
 # res://Scripts/PathfindingController.gd
+
 extends Node2D
 class_name PathfindingController
 
@@ -20,28 +21,22 @@ func _ready() -> void:
 	cell_size  = gm.cell_size
 	tilemap    = gm.get_node("TileMapLayer") as TileMapLayer
 	player     = get_node(player_path)
-	print("🔧 PathfindingController ready. Player:", player, "TileMap:", tilemap)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton \
-	and event.button_index == MOUSE_BUTTON_LEFT \
-	and event.pressed:
-
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var world_pos    : Vector2  = get_global_mouse_position()
 		var clicked_cell : Vector2i = _world_to_cell(world_pos)
 		if not astar_grid.is_in_boundsv(clicked_cell):
 			return
 
-		# --- resource detection -----------------------------------------
-		var td     : TileData = tilemap.get_cell_tile_data(clicked_cell)
-		var res_id : String   = ""
+		# resource detection
+		var td      : TileData = tilemap.get_cell_tile_data(clicked_cell)
+		var res_id  : String   = ""
 		if td:
 			res_id = td.get_custom_data("resource_type")
-
 		var is_resource = res_id != ""
-		print("PathfindingController: clicked_cell=", clicked_cell, " is_resource=", is_resource)
 
-		# --- decide target & look-at cell ------------------------------
+		# decide target & look-at cell
 		var start_cell  : Vector2i = _world_to_cell(player.position)
 		var target_cell : Vector2i = clicked_cell
 		var look_at     : Vector2i = Vector2i(-1, -1)
@@ -49,20 +44,11 @@ func _input(event: InputEvent) -> void:
 		if is_resource:
 			look_at     = clicked_cell
 			target_cell = _nearest_reachable_neighbour(clicked_cell, start_cell)
-			print("PathfindingController: stand_spot=", target_cell)
 			if target_cell == Vector2i(-1, -1):
 				return   # nowhere to stand
 
-		# --- debug A* bounds & solidity ---------------------------------
-		print("A*: region=", astar_grid.region)
-		print("A*: start in bounds? ", astar_grid.is_in_boundsv(start_cell))
-		print("A*: target in bounds? ", astar_grid.is_in_boundsv(target_cell))
-		print("A*: target solid? ", astar_grid.is_point_solid(target_cell))
-
 		var path = astar_grid.get_point_path(start_cell, target_cell)
-		print("PathfindingController: path=", path)
 		if path.size() > 0:
-			print("PathfindingController: calling follow_path()")
 			player.follow_path(path, look_at)
 
 func _world_to_cell(p: Vector2) -> Vector2i:
@@ -73,10 +59,11 @@ func _nearest_reachable_neighbour(tree: Vector2i, start: Vector2i) -> Vector2i:
 	var best_len    := 1_000_000
 	for d in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
 		var adj = tree + d
-		if not astar_grid.is_in_boundsv(adj): continue
-		if astar_grid.is_point_solid(adj): continue
+		if not astar_grid.is_in_boundsv(adj) or astar_grid.is_point_solid(adj):
+			continue
 		var p = astar_grid.get_point_path(start, adj)
-		if p.size() == 0: continue
+		if p.size() == 0:
+			continue
 		if p.size() < best_len:
 			best_len    = p.size()
 			best_target = adj

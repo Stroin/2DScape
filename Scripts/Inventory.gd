@@ -1,4 +1,5 @@
 # res://Scripts/Inventory.gd
+
 extends Node
 class_name Inventory
 
@@ -21,25 +22,32 @@ func add_item(item_id: String, count: int = 1) -> void:
 		var current: int = items[item_id]
 		if current >= cap:
 			push_warning("%s stack is already at its max (%d)" % [item_id, cap])
+			print("Inventory: Cannot add %s; stack at max (%d)" % [item_id, cap])
 			return
 		var new_total: int = current + count
 		if new_total > cap:
 			items[item_id] = cap
 			push_warning("Only added %d of %s to reach max stack (%d)" % [cap - current, item_id, cap])
+			print("Inventory: Added only %d x %s (reached cap %d)" % [cap - current, item_id, cap])
 		else:
 			items[item_id] = new_total
+			print("Inventory: Added %d x %s (now %d/%d)" % [count, item_id, new_total, cap])
 	else:
 		# new slot
 		if items.size() >= max_slots:
 			push_warning("Inventory full! Cannot add new item %s" % item_id)
+			print("Inventory: Cannot add %s; inventory full" % item_id)
 			return
 		if count > cap:
 			items[item_id] = cap
 			push_warning("Only added %d of %s to reach max stack (%d)" % [cap, item_id, cap])
+			print("Inventory: Added %d x %s (reached cap %d)" % [cap, item_id, cap])
 		else:
 			items[item_id] = count
+			print("Inventory: Added %d x %s (new slot)" % [count, item_id])
 
-	print("Inventory: %d x %s (/%d)" % [items[item_id], item_id, cap])
+	# final status
+	print("Inventory: %d x %s (/ %d)" % [items[item_id], item_id, cap])
 
 func remove_item(item_id: String, count: int = 1) -> void:
 	if not items.has(item_id):

@@ -1,4 +1,5 @@
 # res://Scripts/GridManager.gd
+
 extends Node2D
 class_name GridManager
 
@@ -26,7 +27,7 @@ func _ready() -> void:
 
 	# enable processing so we can watch the camera
 	set_process(true)
-	
+
 	# initial build
 	initialize_grid()
 	queue_redraw()
@@ -63,7 +64,7 @@ func initialize_grid() -> void:
 	var gx := int(ceil(world_size.x / cell_size.x)) + 1
 	var gy := int(ceil(world_size.y / cell_size.y)) + 1
 	grid_size = Vector2i(gx, gy)
-	
+
 	var origin_world := cam.global_position - world_size * 0.5
 	var origin_cell := Vector2i(
 		int(floor(origin_world.x / cell_size.x)),
@@ -90,7 +91,6 @@ func initialize_grid() -> void:
 	queue_redraw()
 	emit_signal("grid_initialized")
 
-# -----------------------------------------------------------------------
 # Schedule a tile to be restored after [delay] seconds,
 # and re-enable its A* solidity.
 func schedule_respawn(cell: Vector2i, source_id: int, atlas_coords: Vector2i, delay: float) -> void:
@@ -98,11 +98,9 @@ func schedule_respawn(cell: Vector2i, source_id: int, atlas_coords: Vector2i, de
 	# bind our arguments into the Callable instead of using varray()
 	var cb = Callable(self, "_on_respawn_timeout").bind(cell, source_id, atlas_coords)
 	timer.connect("timeout", cb)
-	print("GridManager: scheduled respawn of resource at %s in %0.1f seconds" % [cell, delay])
 
 func _on_respawn_timeout(cell: Vector2i, source_id: int, atlas_coords: Vector2i) -> void:
 	var tm = $TileMapLayer
 	tm.set_cell(cell, source_id, atlas_coords)
 	tm.update_internals()
 	astar_grid.set_point_solid(cell, true)
-	print("GridManager: respawned resource at", cell)

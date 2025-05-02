@@ -1,4 +1,5 @@
 # res://Scripts/PlayerMovement.gd
+
 extends Area2D
 class_name PlayerMovement
 
@@ -12,8 +13,8 @@ var tile_size       : int   = 64      # your tile dimension
 @export var tilemap_path: NodePath = "../GridManager/TileMapLayer"
 
 # --- runtime state ------------------------------------------------------
-var moving        : bool     = false
-var _look_at_cell : Vector2i = Vector2i(-1, -1)
+var moving         : bool     = false
+var _look_at_cell  : Vector2i = Vector2i(-1, -1)
 
 # --- references ---------------------------------------------------------
 @onready var ray      : RayCast2D       = $RayCast2D
@@ -21,7 +22,6 @@ var _look_at_cell : Vector2i = Vector2i(-1, -1)
 var tilemap : TileMapLayer
 
 func _ready() -> void:
-	print("🔧 PlayerMovement ready on node:", name)
 	position = position.snapped(Vector2.ONE * tile_size) + Vector2.ONE * tile_size * 0.5
 	tilemap = get_node(tilemap_path) as TileMapLayer
 	if tilemap == null:

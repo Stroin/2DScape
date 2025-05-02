@@ -1,4 +1,5 @@
 # res://Scripts/ResourceGatherer.gd
+
 extends Node
 class_name ResourceGatherer
 
@@ -14,10 +15,9 @@ const TileQueries = preload("res://Scripts/TileQueries.gd")
 
 func _ready() -> void:
 	player.gather_requested.connect(_on_gather_requested)
-	print("🔧 ResourceGatherer ready. Listening to:", player)
 
 func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
-	print("ResourceGatherer: gather requested at", cell)
+	# try to find resource under the player's ray
 	var info: Dictionary = TileQueries.get_resource_data_from_ray(ray)
 	if info.is_empty():
 		print("ResourceGatherer: nothing to gather at", cell)
@@ -41,6 +41,7 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 		_:
 			pass  # no tool required
 
+	# gathering timer
 	var timer = get_tree().create_timer(res.gather_time)
 	await timer.timeout
 	print("ResourceGatherer:", res.id, "gather timer complete for", tcell)
@@ -59,7 +60,6 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 
 	# schedule respawn of this resource
 	grid_manager.schedule_respawn(tcell, source_id, old_atlas, res.respawn_time)
-	print("ResourceGatherer: scheduled respawn of %s at %s in %0.1fs" % [res.id, tcell, res.respawn_time])
 
 	# — add the configured drop item into your inventory Autoload (“Inv”) —
 	if res.drop_item_id != "":

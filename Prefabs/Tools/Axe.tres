@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="ToolData" load_steps=2 format=3 uid="uid://caadit02bxtlm"]
 
-[ext_resource type="Script" path="res://Scripts/ToolData.gd" id="1_72a2i"]
+[ext_resource type="Script" path="res://Scripts/ToolData.gd" id="1_syl07"]
 
 [resource]
-script = ExtResource("1_72a2i")
+script = ExtResource("1_syl07")
 id = "axe"
 display_name = "Axe"
 damage = 1
-durability = 1
+durability = 100
 recipe = {}

@@ -15,3 +15,4 @@ skill = "mining"
 required_tool = "pickaxe"
 required_level = 0
 tool_durability_cost = 1
+atlas_coords = Vector2i(0, 11)

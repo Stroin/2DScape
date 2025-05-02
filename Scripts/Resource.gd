@@ -39,4 +39,5 @@ class_name ResourceData
 # how much tool durability this resource costs
 @export var tool_durability_cost: int = 1
 
-# Atlas coords (in your TileSet’s atlas) to swap this resource
+# Atlas coords (in your TileSet’s atlas) to swap this resource’s tile to when gathered
+@export var atlas_coords: Vector2i = Vector2i(0, 0)

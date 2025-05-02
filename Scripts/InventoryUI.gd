@@ -7,9 +7,10 @@ class_name InventoryUI
 @onready var label: Label = $Label
 
 func _process(delta: float) -> void:
-	# pull the current items every frame and rebuild the text
-	var items = Inv.get_items()
+	# pull the current stacks every frame and rebuild the text
+	var stacks = Inv.get_stacks()
 	var txt := "Inventory:\n"
-	for item_id in items.keys():
-		txt += "%s: %d\n" % [item_id, items[item_id]]
+	for item_id in stacks.keys():
+		for s in stacks[item_id]:
+			txt += "%s: %d\n" % [item_id, s]
 	label.text = txt

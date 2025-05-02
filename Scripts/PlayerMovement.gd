@@ -14,8 +14,10 @@ var tile_size       : int   = 64      # your tile dimension
 @export var tilemap_path: NodePath = "../GridManager/TileMapLayer"
 
 # --- runtime state ------------------------------------------------------
-var moving         : bool     = false
-var _look_at_cell  : Vector2i = Vector2i(-1, -1)
+var moving                : bool                 = false
+var _look_at_cell         : Vector2i             = Vector2i(-1, -1)
+var pending_path          : PackedVector2Array   = PackedVector2Array()
+var pending_resource_cell : Vector2i             = Vector2i(-1, -1)
 
 # --- references ---------------------------------------------------------
 @onready var ray      : RayCast2D       = $RayCast2D
@@ -30,7 +32,21 @@ func _ready() -> void:
 
 func follow_path(path: PackedVector2Array, resource_cell: Vector2i = Vector2i(-1, -1)) -> void:
 	if moving:
+		# trim any waypoints we’ve already reached (avoid big jumps on diagonal)
+		var start_idx: int = 0
+		for i in range(path.size()):
+			if path[i].distance_to(position) > 0.1:
+				start_idx = i
+				break
+		var trimmed: PackedVector2Array = PackedVector2Array()
+		for j in range(start_idx, path.size()):
+			trimmed.append(path[j])
+		pending_path = trimmed
+		pending_resource_cell = resource_cell
 		return
+
+	pending_path = PackedVector2Array()
+	pending_resource_cell = Vector2i(-1, -1)
 	_look_at_cell = resource_cell
 
 	if path.size() <= 1:
@@ -69,6 +85,10 @@ func _step_through(path: PackedVector2Array, idx: int) -> void:
 	var tw = get_tree().create_tween()
 	tw.tween_property(self, "position", target_pos, 1.0 / animation_speed).set_trans(Tween.TRANS_SINE)
 	await tw.finished
+	if pending_path.size() > 0:
+		moving = false
+		follow_path(pending_path, pending_resource_cell)
+		return
 	_step_through(path, idx + 1)
 
 func _dir_from_vector(v: Vector2) -> String:

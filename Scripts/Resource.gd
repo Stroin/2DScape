@@ -33,8 +33,10 @@ class_name ResourceData
 # Which tool is required to gather this resource (match a ToolData.id)
 @export var required_tool: String = ""
 
+# Minimum player level in that skill required to gather
+@export var required_level: int = 0
+
 # how much tool durability this resource costs
 @export var tool_durability_cost: int = 1
 
-# Atlas coords (in your TileSet’s atlas) to swap this resource’s tile to when gathered
-@export var atlas_coords: Vector2i = Vector2i(0, 0)
+# Atlas coords (in your TileSet’s atlas) to swap this resource

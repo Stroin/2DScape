@@ -38,6 +38,12 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 			print("ResourceGatherer: You need a %s to gather this resource!" % res.required_tool)
 			return
 
+	# --- require minimum skill level ------------------------------------
+	if res.required_level > 0 and Stats.get_level(res.skill) < res.required_level:
+		print("ResourceGatherer: You need %s level %d to gather this resource!" %
+			  [res.skill.capitalize(), res.required_level])
+		return
+
 	gather_cancelled = false
 	# gathering timer
 	var timer = get_tree().create_timer(res.gather_time)

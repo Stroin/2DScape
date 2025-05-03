@@ -1,5 +1,3 @@
-# res://Scripts/Inventory.gd
-
 extends Node
 class_name Inventory
 
@@ -8,6 +6,12 @@ class_name Inventory
 
 # mapping from item_id to an Array of stack counts
 var items: Dictionary = {}
+
+func _get_total_stacks() -> int:
+	var total: int = 0
+	for stacks in items.values():
+		total += stacks.size()
+	return total
 
 func add_item(item_id: String, count: int = 1) -> void:
 	# look up ingredient data to get its stack limit
@@ -23,8 +27,8 @@ func add_item(item_id: String, count: int = 1) -> void:
 	if items.has(item_id):
 		stacks = items[item_id]
 	else:
-		# new item introduces a slot
-		if items.size() >= max_slots:
+		# new item introduces a slot (i.e. a new stack)
+		if _get_total_stacks() >= max_slots:
 			push_warning("Inventory full! Cannot add new item %s" % item_id)
 			print("Inventory: Cannot add %s; inventory full" % item_id)
 			return
@@ -50,6 +54,10 @@ func add_item(item_id: String, count: int = 1) -> void:
 
 	# create new stacks for any leftover
 	while leftover > 0:
+		if _get_total_stacks() >= max_slots:
+			push_warning("Inventory full! Cannot add new item %s" % item_id)
+			print("Inventory: Cannot add %s; inventory full" % item_id)
+			break
 		var to_add2: int
 		if leftover < cap:
 			to_add2 = leftover

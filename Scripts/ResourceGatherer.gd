@@ -1,5 +1,3 @@
-# res://Scripts/ResourceGatherer.gd
-
 extends Node
 class_name ResourceGatherer
 
@@ -10,6 +8,7 @@ class_name ResourceGatherer
 @export var spawn_world_drops  : bool   = true
 
 var gather_cancelled: bool = false
+var is_gathering: bool = false
 
 # --- references ---------------------------------------------------------
 const TileQueries = preload("res://Scripts/TileQueries.gd")
@@ -21,6 +20,10 @@ func _ready() -> void:
 	player.movement_started.connect(_on_player_moved)
 
 func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
+	# prevent concurrent gathers
+	if is_gathering:
+		return
+
 	# try to find resource under the player's ray
 	var info: Dictionary = TileQueries.get_resource_data_from_ray(ray)
 	if info.is_empty():
@@ -45,11 +48,14 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 		return
 
 	gather_cancelled = false
+	is_gathering = true
 	# gathering timer
 	var timer = get_tree().create_timer(res.gather_time)
 	await timer.timeout
 	if gather_cancelled:
 		print("ResourceGatherer: gathering cancelled due to movement")
+		is_gathering = false
+		gather_cancelled = false
 		return
 
 	print("ResourceGatherer:", res.id, "gather timer complete for", tcell)
@@ -93,5 +99,8 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 		tm.get_parent().add_child(drop)
 		print("ResourceGatherer: spawned drop for", res.id, "at", global_cell_pos)
 
+	is_gathering = false
+
 func _on_player_moved() -> void:
 	gather_cancelled = true
+	is_gathering = false

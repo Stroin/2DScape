@@ -6,8 +6,10 @@ class_name ToolManager
 # Fired when a tool is successfully crafted
 signal tool_crafted(tool_id: String)
 
-# Populate in the inspector with your ToolData .tres files
-@export var tools: Array[ToolData] = []
+# Folder path containing your ToolData .tres files
+@export var tools_folder: String = "res://Prefabs/Tools/"
+# Loaded list of ToolData resources
+var tools: Array[ToolData] = []
 
 # Internal lookup: tool_id → ToolData
 var tool_map: Dictionary = {}
@@ -20,9 +22,28 @@ static var _instance: ToolManager
 
 func _ready() -> void:
 	ToolManager._instance = self
+	_load_tools()
 	# build a quick lookup map
 	for t in tools:
 		tool_map[t.id] = t
+
+func _load_tools() -> void:
+	var dir = DirAccess.open(tools_folder)
+	if dir == null:
+		push_error("ToolManager: could not open folder %s" % tools_folder)
+		return
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.to_lower().ends_with(".tres"):
+			var path = "%s/%s" % [tools_folder, file_name]
+			var res = load(path)
+			if res and res is ToolData:
+				tools.append(res)
+			else:
+				push_warning("ToolManager: resource at %s is not ToolData" % path)
+		file_name = dir.get_next()
+	dir.list_dir_end()
 
 # Returns a Dictionary of stats/recipe for tool_id, or empty + warning if not found.
 func get_tool_stats(tool_id: String) -> Dictionary:

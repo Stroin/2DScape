@@ -42,12 +42,13 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 3.125
-anchor_top = 1.0
+anchor_top = 2.375
 anchor_right = 3.125
-anchor_bottom = 1.0
+anchor_bottom = 2.375
 offset_right = 8.0
 offset_bottom = 8.0
 scale = Vector2(2.16, 2.16)
+text = "CRAFT"
 metadata/_edit_use_anchors_ = true
 
 [node name="CloseButton" type="Button" parent="CanvasLayer/Panel"]
@@ -60,4 +61,5 @@ anchor_bottom = -2.15
 offset_right = 8.0
 offset_bottom = 8.0
 scale = Vector2(2.16, 2.16)
+text = "EXIT"
 metadata/_edit_use_anchors_ = true

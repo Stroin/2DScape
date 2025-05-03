@@ -4,4 +4,4 @@
 
 [node name="Inventory" type="Node"]
 script = ExtResource("1_ixkft")
-max_slots = 4
+max_slots = 6

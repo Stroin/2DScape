@@ -21,3 +21,7 @@ Stats="*res://Prefabs/Autoloads/player_stats.tscn"
 IngredientManage="*res://Scripts/IngredientManager.gd"
 ToolManage="*res://Scripts/ToolManager.gd"
 ResourceManage="*res://Scripts/ResourceManager.gd"
+
+[display]
+
+window/stretch/mode="viewport"

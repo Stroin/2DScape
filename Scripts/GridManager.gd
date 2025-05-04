@@ -103,4 +103,8 @@ func _on_respawn_timeout(cell: Vector2i, source_id: int, atlas_coords: Vector2i)
 	var tm = $TileMapLayer
 	tm.set_cell(cell, source_id, atlas_coords)
 	tm.update_internals()
-	astar_grid.set_point_solid(cell, true)
+	# only re-enable solidity if the cell is still in the current A* region
+	if astar_grid.is_in_boundsv(cell):
+		astar_grid.set_point_solid(cell, true)
+	# let debug visuals redraw
+	emit_signal("grid_initialized")

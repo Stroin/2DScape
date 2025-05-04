@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=8 format=3 uid="uid://dmj4k5um5qa7b"]
+
+[ext_resource type="Script" path="res://Scripts/CraftIngredient.gd" id="1_0kupi"]
+[ext_resource type="Script" path="res://Scripts/RecipeData.gd" id="2_bw207"]
+[ext_resource type="Resource" uid="uid://gh2ms1ue8f15" path="res://Prefabs/Items/Processed/Bar/iron_bar.tres" id="2_v6x1l"]
+[ext_resource type="Resource" uid="uid://blqwavf8v1b8v" path="res://Prefabs/Items/Processed/Wood/oak_planks.tres" id="3_ybfa3"]
+[ext_resource type="Resource" uid="uid://d2tkebl2as0j0" path="res://Prefabs/Items/Tools/Axes/iron_axe.tres" id="4_6oq6j"]
+
+[sub_resource type="Resource" id="Resource_s2fa8"]
+script = ExtResource("1_0kupi")
+item = ExtResource("2_v6x1l")
+count = 3
+
+[sub_resource type="Resource" id="Resource_c8c02"]
+script = ExtResource("1_0kupi")
+item = ExtResource("3_ybfa3")
+count = 2
+
+[resource]
+script = ExtResource("2_bw207")
+output_item = ExtResource("4_6oq6j")
+output_count = 1
+inputs = Array[ExtResource("1_0kupi")]([SubResource("Resource_s2fa8"), SubResource("Resource_c8c02")])
+station = "crafting_table"
+min_skill = "crafting"
+min_level = 15
+xp_reward = 24.0
+skill_reward = "crafting"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://tc1rjumgpkyt"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_1l7l5"]
+
+[resource]
+script = ExtResource("1_1l7l5")
+id = "adamantine_axe"
+display_name = "Adamantine Axe"
+description = ""
+max_stack = 1
+category = 2
+damage = 13
+durability = 1600
+tier = 7
+use_effect = ""

@@ -16,22 +16,29 @@ func _ready() -> void:
 	_load_resources()
 
 func _load_resources() -> void:
-	var dir = DirAccess.open(resources_folder)
-	if dir == null:
-		push_error("ResourceManager: could not open folder %s" % resources_folder)
+	_scan_dir(resources_folder)
+
+func _scan_dir(path: String) -> void:
+	var dir = DirAccess.open(path)
+	if not dir:
+		push_error("ResourceManager: could not open folder %s" % path)
 		return
 	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	while file_name != "":
-		if not dir.current_is_dir() and file_name.to_lower().ends_with(".tres"):
-			var path = "%s/%s" % [resources_folder, file_name]
-			var res = load(path)
-			if res and res is ResourceData:
-				resources.append(res)
-			else:
-				push_warning("ResourceManager: resource at %s is not ResourceData" % path)
-		file_name = dir.get_next()
+	var name = dir.get_next()
+	while name != "":
+		if name != "." and name != "..":
+			var full = "%s/%s" % [path, name]
+			if dir.current_is_dir():
+				_scan_dir(full)
+			elif name.to_lower().ends_with(".tres"):
+				var res = load(full)
+				if res and res is ResourceData:
+					resources.append(res)
+				else:
+					push_warning("ResourceManager: %s is not ResourceData" % full)
+		name = dir.get_next()
 	dir.list_dir_end()
+
 
 static func get_resource(id: String) -> ResourceData:
 	if ResourceManager._instance == null:

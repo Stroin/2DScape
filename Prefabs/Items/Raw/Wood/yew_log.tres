@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://ba3rong7ue44u"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_66oip"]
+
+[resource]
+script = ExtResource("1_66oip")
+id = "yew_log"
+display_name = "Yew Log"
+description = ""
+max_stack = 99
+category = 0
+damage = 0
+durability = 0
+tier = 0
+use_effect = ""

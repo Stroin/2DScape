@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=6 format=3 uid="uid://jp4syadih3jl"]
+
+[ext_resource type="Script" path="res://Scripts/RecipeData.gd" id="1_vasrt"]
+[ext_resource type="Script" path="res://Scripts/CraftIngredient.gd" id="1_wno34"]
+[ext_resource type="Resource" uid="uid://4h0p63h4h7rw" path="res://Prefabs/Items/Raw/Fish/raw_bass.tres" id="2_62r6w"]
+[ext_resource type="Resource" uid="uid://brdapmxr4rhp4" path="res://Prefabs/Items/Cooked/cooked_bass.tres" id="2_cn7a1"]
+
+[sub_resource type="Resource" id="Resource_i23a4"]
+script = ExtResource("1_wno34")
+item = ExtResource("2_62r6w")
+count = 1
+
+[resource]
+script = ExtResource("1_vasrt")
+output_item = ExtResource("2_cn7a1")
+output_count = 1
+inputs = Array[ExtResource("1_wno34")]([SubResource("Resource_i23a4")])
+station = "campfire"
+min_skill = "cooking"
+min_level = 30
+xp_reward = 90.0
+skill_reward = "cooking"

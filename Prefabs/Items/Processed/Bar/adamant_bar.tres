@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://28s3ojghwgsw"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_jd4b5"]
+
+[resource]
+script = ExtResource("1_jd4b5")
+id = "adamant_bar"
+display_name = "Adamant Bar"
+description = ""
+max_stack = 99
+category = 1
+damage = 0
+durability = 0
+tier = 0
+use_effect = ""

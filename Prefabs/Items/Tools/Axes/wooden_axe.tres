@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://d34kkq31wovlj"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_82tt6"]
+
+[resource]
+script = ExtResource("1_82tt6")
+id = "wooden_axe"
+display_name = "Wooden Axe"
+description = ""
+max_stack = 1
+category = 2
+damage = 1
+durability = 60
+tier = 1
+use_effect = ""

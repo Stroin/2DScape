@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=6 format=3 uid="uid://cbm1fy0bkl6md"]
+
+[ext_resource type="Script" path="res://Scripts/CraftIngredient.gd" id="1_y4sby"]
+[ext_resource type="Resource" uid="uid://blqwavf8v1b8v" path="res://Prefabs/Items/Processed/Wood/oak_planks.tres" id="2_7srp5"]
+[ext_resource type="Script" path="res://Scripts/RecipeData.gd" id="2_8yt5n"]
+[ext_resource type="Resource" uid="uid://bm16hilcd3x3d" path="res://Prefabs/Items/Tools/FishingRods/wooden_fishing_rod.tres" id="3_h7y1j"]
+
+[sub_resource type="Resource" id="Resource_5mxmn"]
+script = ExtResource("1_y4sby")
+item = ExtResource("2_7srp5")
+count = 1
+
+[resource]
+script = ExtResource("2_8yt5n")
+output_item = ExtResource("3_h7y1j")
+output_count = 1
+inputs = Array[ExtResource("1_y4sby")]([SubResource("Resource_5mxmn")])
+station = "crafting_table"
+min_skill = "crafting"
+min_level = 1
+xp_reward = 1.0
+skill_reward = "crafting"

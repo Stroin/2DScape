@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=4 format=3 uid="uid://vast4xst8mes"]
+
+[ext_resource type="Resource" uid="uid://cenwlbn31qkss" path="res://Prefabs/Items/Raw/Fish/raw_shark.tres" id="1_lpap1"]
+[ext_resource type="Script" path="res://Scripts/ResourceData.gd" id="1_njljg"]
+[ext_resource type="Resource" uid="uid://d2cx7bk7yicxg" path="res://Prefabs/Items/Tools/FishingRods/gold_fishing_rod.tres" id="2_w10q8"]
+
+[resource]
+script = ExtResource("1_njljg")
+id = "raw_shark"
+display_name = "Raw Shark"
+gather_time = 2.0
+drop_item = ExtResource("1_lpap1")
+drop_amount = 1
+respawn_time = 30.0
+xp_reward = 170.0
+skill = "fishing"
+required_tool = ExtResource("2_w10q8")
+required_level = 50
+tool_durability_cost = 1
+atlas_coords = Vector2i(0, 0)

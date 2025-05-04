@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://b82rkmres64nl"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_1cmkd"]
+
+[resource]
+script = ExtResource("1_1cmkd")
+id = "steel_axe"
+display_name = "Steel Axe"
+description = ""
+max_stack = 1
+category = 2
+damage = 7
+durability = 800
+tier = 4
+use_effect = ""

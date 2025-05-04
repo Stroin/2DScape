@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=4 format=3 uid="uid://c2it2066bskbj"]
+
+[ext_resource type="Script" path="res://Scripts/ResourceData.gd" id="1_pjgh8"]
+[ext_resource type="Resource" uid="uid://ncrlbte6h4rw" path="res://Prefabs/Items/Raw/Ore/coal.tres" id="1_ys0hd"]
+[ext_resource type="Resource" uid="uid://byw5d5weyq68o" path="res://Prefabs/Items/Tools/Pickaxes/iron_pickaxe.tres" id="2_ccrkc"]
+
+[resource]
+script = ExtResource("1_pjgh8")
+id = "coal"
+display_name = "Coal"
+gather_time = 1.2
+drop_item = ExtResource("1_ys0hd")
+drop_amount = 1
+respawn_time = 30.0
+xp_reward = 65.0
+skill = "mining"
+required_tool = ExtResource("2_ccrkc")
+required_level = 30
+tool_durability_cost = 1
+atlas_coords = Vector2i(0, 0)

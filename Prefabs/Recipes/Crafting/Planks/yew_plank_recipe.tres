@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=6 format=3 uid="uid://dcwp6yxe3gn06"]
+
+[ext_resource type="Script" path="res://Scripts/CraftIngredient.gd" id="1_8ojo8"]
+[ext_resource type="Resource" uid="uid://ba3rong7ue44u" path="res://Prefabs/Items/Raw/Wood/yew_log.tres" id="2_7guhi"]
+[ext_resource type="Script" path="res://Scripts/RecipeData.gd" id="2_8r2gt"]
+[ext_resource type="Resource" uid="uid://bdedvcw6gmvgp" path="res://Prefabs/Items/Processed/Wood/yew_planks.tres" id="3_ieina"]
+
+[sub_resource type="Resource" id="Resource_5abpy"]
+script = ExtResource("1_8ojo8")
+item = ExtResource("2_7guhi")
+count = 1
+
+[resource]
+script = ExtResource("2_8r2gt")
+output_item = ExtResource("3_ieina")
+output_count = 1
+inputs = Array[ExtResource("1_8ojo8")]([SubResource("Resource_5abpy")])
+station = "crafting_table"
+min_skill = "crafting"
+min_level = 60
+xp_reward = 10.0
+skill_reward = "crafting"

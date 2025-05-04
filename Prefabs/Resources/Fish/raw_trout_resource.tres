@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=4 format=3 uid="uid://bhfxhk3qrfu7e"]
+
+[ext_resource type="Script" path="res://Scripts/ResourceData.gd" id="1_8auby"]
+[ext_resource type="Resource" uid="uid://bg1onsy2cvwa8" path="res://Prefabs/Items/Raw/Fish/raw_trout.tres" id="1_142k2"]
+[ext_resource type="Resource" uid="uid://bm16hilcd3x3d" path="res://Prefabs/Items/Tools/FishingRods/wooden_fishing_rod.tres" id="2_kx1dv"]
+
+[resource]
+script = ExtResource("1_8auby")
+id = "raw_trout"
+display_name = "Raw Trout"
+gather_time = 1.0
+drop_item = ExtResource("1_142k2")
+drop_amount = 1
+respawn_time = 30.0
+xp_reward = 10.0
+skill = "fishing"
+required_tool = ExtResource("2_kx1dv")
+required_level = 1
+tool_durability_cost = 1
+atlas_coords = Vector2i(0, 0)

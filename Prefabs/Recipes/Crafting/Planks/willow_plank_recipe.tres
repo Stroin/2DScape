@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=6 format=3 uid="uid://2tio74fosh4c"]
+
+[ext_resource type="Script" path="res://Scripts/CraftIngredient.gd" id="1_88fk7"]
+[ext_resource type="Script" path="res://Scripts/RecipeData.gd" id="2_5jgo7"]
+[ext_resource type="Resource" uid="uid://roiwc125q1w6" path="res://Prefabs/Items/Raw/Wood/willow_log.tres" id="2_41ugv"]
+[ext_resource type="Resource" uid="uid://qmdqjaic0joo" path="res://Prefabs/Items/Processed/Wood/willow_planks.tres" id="3_7quqb"]
+
+[sub_resource type="Resource" id="Resource_jsd4c"]
+script = ExtResource("1_88fk7")
+item = ExtResource("2_41ugv")
+count = 1
+
+[resource]
+script = ExtResource("2_5jgo7")
+output_item = ExtResource("3_7quqb")
+output_count = 1
+inputs = Array[ExtResource("1_88fk7")]([SubResource("Resource_jsd4c")])
+station = "crafting_table"
+min_skill = "crafting"
+min_level = 15
+xp_reward = 4.0
+skill_reward = "crafting"

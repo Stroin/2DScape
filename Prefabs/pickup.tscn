@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://gviv553ix32b"]
+
+[ext_resource type="Script" path="res://Scripts/ItemPickup.gd" id="1_w4041"]
+[ext_resource type="Texture2D" uid="uid://ci6xf4dm3k0c" path="res://Assets/axe.png" id="2_4nhno"]
+[ext_resource type="Resource" uid="uid://d34kkq31wovlj" path="res://Prefabs/Items/Tools/Axes/wooden_axe.tres" id="2_lxiox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o12ik"]
+size = Vector2(257, 255)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_w4041")
+item_resource = ExtResource("2_lxiox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4nhno")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_o12ik")

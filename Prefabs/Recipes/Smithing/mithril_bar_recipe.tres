@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=8 format=3 uid="uid://y1h64nybdvpf"]
+
+[ext_resource type="Script" path="res://Scripts/RecipeData.gd" id="1_21ec0"]
+[ext_resource type="Script" path="res://Scripts/CraftIngredient.gd" id="1_bpml5"]
+[ext_resource type="Resource" uid="uid://cqmay1n63uqbh" path="res://Prefabs/Items/Raw/Ore/mithril_ore.tres" id="2_xswbu"]
+[ext_resource type="Resource" uid="uid://ncrlbte6h4rw" path="res://Prefabs/Items/Raw/Ore/coal.tres" id="3_pgmv1"]
+[ext_resource type="Resource" uid="uid://dfvnw6k6ewkp3" path="res://Prefabs/Items/Processed/Bar/mithril_bar.tres" id="4_ydhwg"]
+
+[sub_resource type="Resource" id="Resource_bekub"]
+script = ExtResource("1_bpml5")
+item = ExtResource("2_xswbu")
+count = 1
+
+[sub_resource type="Resource" id="Resource_dnw6l"]
+script = ExtResource("1_bpml5")
+item = ExtResource("3_pgmv1")
+count = 4
+
+[resource]
+script = ExtResource("1_21ec0")
+output_item = ExtResource("4_ydhwg")
+output_count = 1
+inputs = Array[ExtResource("1_bpml5")]([SubResource("Resource_bekub"), SubResource("Resource_dnw6l")])
+station = "anvil"
+min_skill = "smithing"
+min_level = 50
+xp_reward = 30.0
+skill_reward = "smithing"

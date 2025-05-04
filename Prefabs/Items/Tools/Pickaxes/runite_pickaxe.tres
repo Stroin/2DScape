@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://cf4pgam5ofee3"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_f17q7"]
+
+[resource]
+script = ExtResource("1_f17q7")
+id = "runite_pickaxe"
+display_name = "Runite Pickaxe"
+description = ""
+max_stack = 1
+category = 2
+damage = 15
+durability = 2000
+tier = 8
+use_effect = ""

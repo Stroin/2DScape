@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bvqb4voirtcuk"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_j7tkm"]
+
+[resource]
+script = ExtResource("1_j7tkm")
+id = "runite_fishing_rod"
+display_name = "Runite Fishing Rod"
+description = ""
+max_stack = 1
+category = 2
+damage = 0
+durability = 2000
+tier = 8
+use_effect = ""

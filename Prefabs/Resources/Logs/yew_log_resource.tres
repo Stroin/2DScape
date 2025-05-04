@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=4 format=3 uid="uid://k2nfkxm85rdd"]
+
+[ext_resource type="Script" path="res://Scripts/ResourceData.gd" id="1_l0tin"]
+[ext_resource type="Resource" uid="uid://bdedvcw6gmvgp" path="res://Prefabs/Items/Processed/Wood/yew_planks.tres" id="1_us6oh"]
+[ext_resource type="Resource" uid="uid://b82rkmres64nl" path="res://Prefabs/Items/Tools/Axes/steel_axe.tres" id="2_06led"]
+
+[resource]
+script = ExtResource("1_l0tin")
+id = "yew_log"
+display_name = "Yew Log"
+gather_time = 2.0
+drop_item = ExtResource("1_us6oh")
+drop_amount = 1
+respawn_time = 30.0
+xp_reward = 175.0
+skill = "woodcutting"
+required_tool = ExtResource("2_06led")
+required_level = 60
+tool_durability_cost = 3
+atlas_coords = Vector2i(0, 0)

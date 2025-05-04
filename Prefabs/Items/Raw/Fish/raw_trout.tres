@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bg1onsy2cvwa8"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_38g5i"]
+
+[resource]
+script = ExtResource("1_38g5i")
+id = "raw_trout"
+display_name = "Raw Trout"
+description = ""
+max_stack = 99
+category = 0
+damage = 0
+durability = 0
+tier = 0
+use_effect = ""

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://d2cx7bk7yicxg"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_sqcs0"]
+
+[resource]
+script = ExtResource("1_sqcs0")
+id = "gold_fishing_rod"
+display_name = "Gold Fishing Rod"
+description = ""
+max_stack = 1
+category = 2
+damage = 0
+durability = 400
+tier = 5
+use_effect = ""

@@ -1,20 +1,18 @@
-# res://Scripts/CraftingUI.gd
-
 extends Control
 class_name CraftingUI
 
 @export var pathfinding_controller_path: NodePath
 
-# --- node refs ----------------------------------------------------------
-@onready var pc           : PathfindingController = get_node(pathfinding_controller_path) as PathfindingController
-@onready var player       : PlayerMovement        = pc.player
-@onready var panel        : Panel                 = $CanvasLayer/Panel
-@onready var list_vbox    : VBoxContainer         = $CanvasLayer/Panel/VBoxContainer
-@onready var recipe_label : Label                 = $CanvasLayer/Panel/RecipeLabel
-@onready var craft_button : Button                = $CanvasLayer/Panel/CraftButton
-@onready var close_button : Button                = $CanvasLayer/Panel/CloseButton
+@onready var pc            = get_node(pathfinding_controller_path)
+@onready var player        = pc.player
+@onready var panel         = $CanvasLayer/Panel
+@onready var list_vbox     = $CanvasLayer/Panel/ScrollContainer/VBoxContainer
+@onready var details_label = $CanvasLayer/Panel/RecipeLabel
+@onready var craft_button  = $CanvasLayer/Panel/CraftButton
+@onready var close_button  = $CanvasLayer/Panel/CloseButton
 
-var selected_id: String = ""
+var selected_recipe: RecipeData = null
+var current_station: String     = ""
 
 func _ready() -> void:
 	panel.visible = false
@@ -24,11 +22,10 @@ func _ready() -> void:
 	if player:
 		player.connect("movement_started", Callable(self, "_on_player_move_away"))
 	else:
-		push_warning("CraftingUI: player not found for movement_started")
+		push_warning("CraftingUI: player not found")
 
-func _on_interact(interactable_type: String, cell: Vector2i) -> void:
-	if interactable_type != "crafting_table":
-		return
+func _on_interact(station: String, _cell) -> void:
+	current_station = station
 	panel.visible = true
 	pc.set_process_input(false)
 	_refresh_list()
@@ -42,36 +39,35 @@ func _on_player_move_away() -> void:
 	pc.set_process_input(true)
 
 func _refresh_list() -> void:
+	# clear old buttons
 	for child in list_vbox.get_children():
 		child.queue_free()
-	for tool_data in ToolManager._instance.tools:
+	# add one button per RecipeData for this station
+	for r in RecipeManager.get_recipes_for_station(current_station):
 		var btn = Button.new()
-		btn.text = tool_data.display_name
-		btn.name = tool_data.id
+		btn.text = r.output_item.display_name
+		btn.name = r.output_item.id
 		list_vbox.add_child(btn)
-		var cb = Callable(self, "_on_select_craft").bind(tool_data.id)
-		btn.connect("pressed", cb)
+		btn.connect("pressed", Callable(self, "_on_select").bind(r))
 
-func _on_select_craft(tool_id: String) -> void:
-	selected_id = tool_id
-	var stats  = ToolManager._instance.get_tool_stats(tool_id)
-	var recipe = stats["recipe"]
-	var txt = "Recipe for %s:\n" % stats["display_name"]
-	for item_id in recipe.keys():
-		var ing = IngredientManager.get_ingredient(item_id)
-		var name: String = ""
-		if ing != null:
-			name = ing.display_name
-		else:
-			name = item_id
-		txt += "%s: %d\n" % [name, recipe[item_id]]
-	recipe_label.text = txt
+func _on_select(r: RecipeData) -> void:
+	selected_recipe = r
+	# header: output name & count
+	var txt = "%s x%d\n\nRequires:\n" % [r.output_item.display_name, r.output_count]
+	# list each ingredient
+	for ci in r.inputs:
+		txt += "%s: %d\n" % [ci.item.display_name, ci.count]
+	# skill & XP
+	if r.min_skill != "":
+		txt += "\nNeed %s level %d\nGain %.1f XP" % [
+			r.min_skill.capitalize(), r.min_level, r.xp_reward
+		]
+	details_label.text = txt
 
 func _on_craft_pressed() -> void:
-	if selected_id == "":
+	if selected_recipe == null:
 		return
-	if ToolManager._instance.craft(selected_id):
-		panel.visible = false
-		pc.set_process_input(true)
+	if RecipeManager.craft(selected_recipe):
+		_on_close_pressed()
 	else:
-		recipe_label.text = "Cannot craft %s: missing ingredients" % selected_id
+		details_label.text = "Cannot craft: check ingredients & skill"

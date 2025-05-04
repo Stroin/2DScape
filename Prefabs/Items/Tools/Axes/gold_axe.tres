@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://da7lfvsa36v2j"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_ntmnp"]
+
+[resource]
+script = ExtResource("1_ntmnp")
+id = "gold_axe"
+display_name = "Gold Axe"
+description = ""
+max_stack = 1
+category = 2
+damage = 9
+durability = 300
+tier = 5
+use_effect = ""

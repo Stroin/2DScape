@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=6 format=3 uid="uid://casf5l824h4pj"]
+
+[ext_resource type="Script" path="res://Scripts/CraftIngredient.gd" id="1_cgl5f"]
+[ext_resource type="Script" path="res://Scripts/RecipeData.gd" id="1_tpsul"]
+[ext_resource type="Resource" uid="uid://cirmwtionboyu" path="res://Prefabs/Items/Raw/Fish/raw_monkfish.tres" id="2_1uqjf"]
+[ext_resource type="Resource" uid="uid://dlvs7x2stwkfk" path="res://Prefabs/Items/Cooked/cooked_monkfish.tres" id="3_1pmyp"]
+
+[sub_resource type="Resource" id="Resource_saeix"]
+script = ExtResource("1_cgl5f")
+item = ExtResource("2_1uqjf")
+count = 1
+
+[resource]
+script = ExtResource("1_tpsul")
+output_item = ExtResource("3_1pmyp")
+output_count = 1
+inputs = Array[ExtResource("1_cgl5f")]([SubResource("Resource_saeix")])
+station = "campfire"
+min_skill = "cooking"
+min_level = 42
+xp_reward = 130.0
+skill_reward = "cooking"

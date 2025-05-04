@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=6 format=3 uid="uid://da5h7xrf2yumf"]
+
+[ext_resource type="Script" path="res://Scripts/CraftIngredient.gd" id="1_bvhgj"]
+[ext_resource type="Script" path="res://Scripts/RecipeData.gd" id="1_qx36g"]
+[ext_resource type="Resource" uid="uid://buro0cnkc8eb8" path="res://Prefabs/Items/Raw/Ore/gold_ore.tres" id="2_vi3tx"]
+[ext_resource type="Resource" uid="uid://cnb7px0lpagex" path="res://Prefabs/Items/Processed/Bar/gold_bar.tres" id="3_fe0gd"]
+
+[sub_resource type="Resource" id="Resource_1yom7"]
+script = ExtResource("1_bvhgj")
+item = ExtResource("2_vi3tx")
+count = 1
+
+[resource]
+script = ExtResource("1_qx36g")
+output_item = ExtResource("3_fe0gd")
+output_count = 1
+inputs = Array[ExtResource("1_bvhgj")]([SubResource("Resource_1yom7")])
+station = "anvil"
+min_skill = "smithing"
+min_level = 40
+xp_reward = 22.5
+skill_reward = "smithing"

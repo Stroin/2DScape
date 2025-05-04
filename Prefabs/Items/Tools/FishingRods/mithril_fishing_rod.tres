@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://btt3mobjqsjq7"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_w62dt"]
+
+[resource]
+script = ExtResource("1_w62dt")
+id = "mithril_fishing_rod"
+display_name = "Mithril Fishing Rod"
+description = ""
+max_stack = 1
+category = 2
+damage = 0
+durability = 1200
+tier = 6
+use_effect = ""

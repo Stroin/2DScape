@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://toylc15i3ojr"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_wbph4"]
+
+[resource]
+script = ExtResource("1_wbph4")
+id = "bronze_pickaxe"
+display_name = "Bronze Pickaxe"
+description = ""
+max_stack = 1
+category = 2
+damage = 3
+durability = 250
+tier = 2
+use_effect = ""

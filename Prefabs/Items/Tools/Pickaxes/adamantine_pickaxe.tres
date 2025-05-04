@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://ckfj38642bhia"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_mvoda"]
+
+[resource]
+script = ExtResource("1_mvoda")
+id = "adamantine_pickaxe"
+display_name = "Adamantine Pickaxe"
+description = ""
+max_stack = 1
+category = 2
+damage = 13
+durability = 1600
+tier = 7
+use_effect = ""

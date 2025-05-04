@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://da8t6vi11jdiw"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_hm6lp"]
+
+[resource]
+script = ExtResource("1_hm6lp")
+id = "runite_axe"
+display_name = "Runite Axe"
+description = ""
+max_stack = 1
+category = 2
+damage = 15
+durability = 2000
+tier = 8
+use_effect = ""

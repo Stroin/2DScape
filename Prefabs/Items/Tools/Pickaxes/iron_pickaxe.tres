@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://byw5d5weyq68o"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_qq764"]
+
+[resource]
+script = ExtResource("1_qq764")
+id = "iron_pickaxe"
+display_name = "Iron Pickaxe"
+description = ""
+max_stack = 1
+category = 2
+damage = 5
+durability = 500
+tier = 3
+use_effect = ""

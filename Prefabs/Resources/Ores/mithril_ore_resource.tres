@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=4 format=3 uid="uid://b0aw0oyof8hj3"]
+
+[ext_resource type="Script" path="res://Scripts/ResourceData.gd" id="1_xjgqs"]
+[ext_resource type="Resource" uid="uid://cqmay1n63uqbh" path="res://Prefabs/Items/Raw/Ore/mithril_ore.tres" id="1_ytwes"]
+[ext_resource type="Resource" uid="uid://bse0a1o6cdbme" path="res://Prefabs/Items/Tools/Pickaxes/gold_pickaxe.tres" id="2_c4727"]
+
+[resource]
+script = ExtResource("1_xjgqs")
+id = "mithril_ore"
+display_name = "Mithril Ore"
+gather_time = 1.7
+drop_item = ExtResource("1_ytwes")
+drop_amount = 1
+respawn_time = 30.0
+xp_reward = 80.0
+skill = "mining"
+required_tool = ExtResource("2_c4727")
+required_level = 55
+tool_durability_cost = 3
+atlas_coords = Vector2i(0, 0)

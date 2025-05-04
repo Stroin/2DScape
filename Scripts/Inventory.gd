@@ -14,11 +14,11 @@ func _get_total_stacks() -> int:
 	return total
 
 func add_item(item_id: String, count: int = 1) -> void:
-	# look up ingredient data to get its stack limit
-	var ing: IngredientData = IngredientManager.get_ingredient(item_id)
+	# look up item data to get its stack limit
+	var item_def: ItemData = ItemManager.get_item(item_id)
 	var cap: int
-	if ing != null:
-		cap = ing.max_stack
+	if item_def != null:
+		cap = item_def.max_stack
 	else:
 		cap = count
 
@@ -27,7 +27,6 @@ func add_item(item_id: String, count: int = 1) -> void:
 	if items.has(item_id):
 		stacks = items[item_id]
 	else:
-		# new item introduces a slot (i.e. a new stack)
 		if _get_total_stacks() >= max_slots:
 			push_warning("Inventory full! Cannot add new item %s" % item_id)
 			print("Inventory: Cannot add %s; inventory full" % item_id)
@@ -43,14 +42,11 @@ func add_item(item_id: String, count: int = 1) -> void:
 		var current: int = stacks[i]
 		if current < cap:
 			var space: int = cap - current
-			var to_add: int
-			if leftover < space:
-				to_add = leftover
-			else:
-				to_add = space
+			var to_add: int = leftover if leftover < space else space
 			stacks[i] += to_add
 			leftover -= to_add
-			print("Inventory: Added %d x %s to existing stack (now %d/%d)" % [to_add, item_id, stacks[i], cap])
+			print("Inventory: Added %d x %s to existing stack (now %d/%d)" %
+				  [to_add, item_id, stacks[i], cap])
 
 	# create new stacks for any leftover
 	while leftover > 0:
@@ -58,11 +54,7 @@ func add_item(item_id: String, count: int = 1) -> void:
 			push_warning("Inventory full! Cannot add new item %s" % item_id)
 			print("Inventory: Cannot add %s; inventory full" % item_id)
 			break
-		var to_add2: int
-		if leftover < cap:
-			to_add2 = leftover
-		else:
-			to_add2 = cap
+		var to_add2: int = leftover if leftover < cap else cap
 		stacks.append(to_add2)
 		leftover -= to_add2
 		print("Inventory: Added %d x %s in new stack" % [to_add2, item_id])
@@ -83,7 +75,6 @@ func remove_item(item_id: String, count: int = 1) -> void:
 			to_remove -= current
 			print("Inventory: Removed %d x %s from stack" % [current, item_id])
 			stacks.remove_at(i)
-			# next element shifts into index i
 		else:
 			stacks[i] = current - to_remove
 			print("Inventory: Removed %d x %s from stack" % [to_remove, item_id])

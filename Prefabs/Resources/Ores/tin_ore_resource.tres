@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=4 format=3 uid="uid://bi4an1gnxc2y0"]
+
+[ext_resource type="Resource" uid="uid://bgec8qossptu8" path="res://Prefabs/Items/Raw/Ore/tin_ore.tres" id="1_d36cv"]
+[ext_resource type="Resource" uid="uid://csdf1rjigxvom" path="res://Prefabs/Items/Tools/Pickaxes/wooden_pickaxe.tres" id="2_0yjr3"]
+[ext_resource type="Script" path="res://Scripts/ResourceData.gd" id="3_oceds"]
+
+[resource]
+script = ExtResource("3_oceds")
+id = "tin_ore"
+display_name = "Tin Ore"
+gather_time = 1.0
+drop_item = ExtResource("1_d36cv")
+drop_amount = 1
+respawn_time = 30.0
+xp_reward = 17.5
+skill = "mining"
+required_tool = ExtResource("2_0yjr3")
+required_level = 1
+tool_durability_cost = 1
+atlas_coords = Vector2i(0, 0)

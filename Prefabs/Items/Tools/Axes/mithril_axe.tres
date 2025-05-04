@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://dox662nft7yhm"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_mhxtc"]
+
+[resource]
+script = ExtResource("1_mhxtc")
+id = "mithril_axe"
+display_name = "Mithril Axe"
+description = ""
+max_stack = 1
+category = 2
+damage = 11
+durability = 1200
+tier = 6
+use_effect = ""

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://b885ur8sgs2qn"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_4t2kf"]
+
+[resource]
+script = ExtResource("1_4t2kf")
+id = "bronze_axe"
+display_name = "Bronze Axe"
+description = ""
+max_stack = 1
+category = 2
+damage = 3
+durability = 250
+tier = 2
+use_effect = ""

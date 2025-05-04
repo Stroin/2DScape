@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bdedvcw6gmvgp"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_y382d"]
+
+[resource]
+script = ExtResource("1_y382d")
+id = "yew_planks"
+display_name = "Yew Planks"
+description = ""
+max_stack = 99
+category = 1
+damage = 0
+durability = 0
+tier = 0
+use_effect = ""

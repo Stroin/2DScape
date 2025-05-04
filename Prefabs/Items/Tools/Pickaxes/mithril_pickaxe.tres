@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://0xcpp4jlaio"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_rysb1"]
+
+[resource]
+script = ExtResource("1_rysb1")
+id = "mithril_pickaxe"
+display_name = "Mithril Pickaxe"
+description = ""
+max_stack = 1
+category = 2
+damage = 11
+durability = 1200
+tier = 6
+use_effect = ""

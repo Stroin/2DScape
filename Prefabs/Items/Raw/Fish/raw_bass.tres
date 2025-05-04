@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://4h0p63h4h7rw"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_rqqyj"]
+
+[resource]
+script = ExtResource("1_rqqyj")
+id = "raw_bass"
+display_name = "Raw Bass"
+description = ""
+max_stack = 99
+category = 0
+damage = 0
+durability = 0
+tier = 0
+use_effect = ""

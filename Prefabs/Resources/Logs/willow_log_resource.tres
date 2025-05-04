@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=4 format=3 uid="uid://dt7pcdjffpx5"]
+
+[ext_resource type="Script" path="res://Scripts/ResourceData.gd" id="1_ptu5b"]
+[ext_resource type="Resource" uid="uid://roiwc125q1w6" path="res://Prefabs/Items/Raw/Wood/willow_log.tres" id="1_vnngj"]
+[ext_resource type="Resource" uid="uid://d34kkq31wovlj" path="res://Prefabs/Items/Tools/Axes/wooden_axe.tres" id="2_np66t"]
+
+[resource]
+script = ExtResource("1_ptu5b")
+id = "willow_log"
+display_name = "Willow Log"
+gather_time = 1.2
+drop_item = ExtResource("1_vnngj")
+drop_amount = 1
+respawn_time = 30.0
+xp_reward = 67.5
+skill = "woodcutting"
+required_tool = ExtResource("2_np66t")
+required_level = 15
+tool_durability_cost = 1
+atlas_coords = Vector2i(0, 0)

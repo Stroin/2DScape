@@ -34,9 +34,9 @@ script = SubResource("GDScript_1prtv")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -124.0
+offset_top = -307.0
 offset_right = 40.0
-offset_bottom = -84.0
+offset_bottom = -267.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_el5n5")
 

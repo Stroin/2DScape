@@ -25,4 +25,6 @@ ResourceManage="*res://Scripts/ResourceManager.gd"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="viewport"

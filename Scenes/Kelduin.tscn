@@ -148,7 +148,7 @@ texture_region_size = Vector2i(64, 64)
 2:14/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_rqjml"]
-tile_size = Vector2i(64, 64)
+tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "resource_type"
 custom_data_layer_0/type = 4
@@ -171,10 +171,13 @@ pathfinding_controller_path = NodePath("../PathfindingController")
 script = ExtResource("4_vcwke")
 player_path = NodePath("../Player")
 grid_manager_path = NodePath("../GridManager")
+tile_size = 32
 spawn_world_drops = false
 
 [node name="GridManager" type="Node2D" parent="."]
+position = Vector2(0, -1)
 script = ExtResource("1_5oplc")
+cell_size = Vector2i(32, 32)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="GridManager"]
 z_index = -1
@@ -195,4 +198,4 @@ grid_manager_path = NodePath("../GridManager")
 player_path = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("3_foxom")]
-position = Vector2(433, 329)
+position = Vector2(254, 175)

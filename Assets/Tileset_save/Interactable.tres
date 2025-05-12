@@ -2316,6 +2316,11 @@ texture = ExtResource("3_2wwvx")
 67:45/0 = 0
 
 [resource]
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "resource_type"
+custom_data_layer_0/type = 4
+custom_data_layer_1/name = "interactable_type"
+custom_data_layer_1/type = 4
 sources/0 = SubResource("TileSetAtlasSource_lj8n1")
 sources/1 = SubResource("TileSetAtlasSource_i5qpv")
 sources/2 = SubResource("TileSetAtlasSource_rkbd1")

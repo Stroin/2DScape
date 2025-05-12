@@ -1,5 +1,3 @@
-# res://Scripts/PlayerMovement.gd
-
 extends Area2D
 class_name PlayerMovement
 
@@ -11,7 +9,7 @@ var animation_speed : float = 2.0     # tiles per second
 var tile_size       : int   = 64      # your tile dimension
 
 # --- exported node paths -----------------------------------------------
-@export var tilemap_path: NodePath = "../GridManager/TileMapLayer"
+@export var tilemap_path: NodePath = "../GridManager/TileMap/Interactable"
 
 # --- runtime state ------------------------------------------------------
 var moving                : bool                 = false

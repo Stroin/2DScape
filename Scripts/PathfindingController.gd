@@ -1,5 +1,3 @@
-# res://Scripts/PathfindingController.gd
-
 extends Node2D
 class_name PathfindingController
 
@@ -8,6 +6,7 @@ signal interact_requested(interactable_type: String, cell: Vector2i)
 # --- exported node paths ------------------------------------------------
 @export var grid_manager_path : NodePath
 @export var player_path       : NodePath
+@export var interactable_tilemap_path: NodePath
 
 # --- cached grid data ---------------------------------------------------
 var astar_grid : AStarGrid2D
@@ -23,7 +22,7 @@ func _ready() -> void:
 	var gm = get_node(grid_manager_path) as GridManager
 	astar_grid = gm.astar_grid
 	cell_size  = gm.cell_size
-	tilemap    = gm.get_node("TileMapLayer") as TileMapLayer
+	tilemap    = get_node(interactable_tilemap_path) as TileMapLayer
 	player     = get_node(player_path)
 	player.connect("gather_requested", Callable(self, "_on_player_arrived"))
 	print("🔧 PathfindingController ready. Player:", player, "TileMap:", tilemap)

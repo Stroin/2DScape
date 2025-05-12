@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://byl3d5bwrm853" path="res://Assets/Environment/Tilesets/Water_tiles.png" id="9_sto8o"]
 [ext_resource type="Texture2D" uid="uid://3dudqaikarpa" path="res://Assets/Environment/Tilesets/Dungeon_Tiles.png" id="10_2h48e"]
 [ext_resource type="Texture2D" uid="uid://qupwr734ddtg" path="res://Assets/Environment/Props/Static/Trees/Model_01/Size_04.png" id="10_q2g5m"]
-[ext_resource type="PackedScene" uid="uid://b0wysm6c2nqgj" path="res://Prefabs/Player.tscn" id="10_ralht"]
+[ext_resource type="PackedScene" uid="uid://b0wysm6c2nqgj" path="res://Prefabs/OldPlayer.tscn" id="10_ralht"]
 [ext_resource type="Texture2D" uid="uid://dj5dfsqkdrswh" path="res://Assets/Environment/Props/Static/Trees/Model_01/Size_02.png" id="11_eqfmh"]
 [ext_resource type="Texture2D" uid="uid://cx21417q744w6" path="res://Assets/Environment/Structures/Buildings/Walls.png" id="12_h7nk0"]
 [ext_resource type="Texture2D" uid="uid://d2t8gpw7t4ohs" path="res://Assets/Environment/Structures/Buildings/Roofs.png" id="13_ktmyh"]

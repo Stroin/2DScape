@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/GridManager.gd" id="1_5oplc"]
 [ext_resource type="PackedScene" uid="uid://cud6fi3vvsobc" path="res://Scenes/StatsUI.tscn" id="2_uqgxw"]
 [ext_resource type="Script" path="res://Scripts/DebugGrid.gd" id="3_as78n"]
-[ext_resource type="PackedScene" uid="uid://b0wysm6c2nqgj" path="res://Prefabs/Player.tscn" id="3_foxom"]
+[ext_resource type="PackedScene" uid="uid://b0wysm6c2nqgj" path="res://Prefabs/OldPlayer.tscn" id="3_foxom"]
 [ext_resource type="PackedScene" uid="uid://dsmvm0ril0ns6" path="res://Scenes/CraftingUI.tscn" id="3_lw3ad"]
 [ext_resource type="Script" path="res://Scripts/PathfindingController.gd" id="4_h5y8m"]
 [ext_resource type="Script" path="res://Scripts/ResourceGatherer.gd" id="4_vcwke"]

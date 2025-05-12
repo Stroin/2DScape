@@ -1,8 +1,6 @@
-[gd_scene load_steps=11 format=4 uid="uid://byhyb2px4bjme"]
+[gd_scene load_steps=10 format=4 uid="uid://byhyb2px4bjme"]
 
-[ext_resource type="Texture2D" uid="uid://ck5fsit8vij5l" path="res://Assets/Entities/Characters/Body_A/Animations/Carry_Idle/Carry_Idle_Down-Sheet.png" id="1_cjybb"]
 [ext_resource type="Script" path="res://Scripts/GridManager.gd" id="2_2qx5a"]
-[ext_resource type="PackedScene" uid="uid://b0wysm6c2nqgj" path="res://Prefabs/Player.tscn" id="2_3agq4"]
 [ext_resource type="TileSet" uid="uid://bt0emjqvfk6ex" path="res://Assets/Tileset_save/GroundWater.tres" id="3_1yyya"]
 [ext_resource type="TileSet" uid="uid://b1s5sytcyqbuv" path="res://Assets/Tileset_save/Walls.tres" id="4_87pfl"]
 [ext_resource type="TileSet" uid="uid://cowc4x4ol25yq" path="res://Assets/Tileset_save/Decorative.tres" id="5_a1015"]
@@ -10,19 +8,13 @@
 [ext_resource type="Script" path="res://Scripts/DebugGrid.gd" id="7_bk6tr"]
 [ext_resource type="Script" path="res://Scripts/PathfindingController.gd" id="8_sbq4y"]
 [ext_resource type="Script" path="res://Scripts/ResourceGatherer.gd" id="10_e104n"]
+[ext_resource type="PackedScene" uid="uid://bkpqqthrusru4" path="res://Prefabs/Player.tscn" id="11_bcha8"]
 
 [node name="Tutorial_Part1" type="Node2D"]
-
-[node name="CarryIdleDown-sheet" type="Sprite2D" parent="."]
-visible = false
-z_index = 1
-position = Vector2(569, 192)
-texture = ExtResource("1_cjybb")
 
 [node name="GridManager" type="Node2D" parent="."]
 position = Vector2(0, -1)
 script = ExtResource("2_2qx5a")
-cell_size = Vector2i(16, 16)
 collision_container_path = NodePath("TileMap/Walls")
 interactable_tilemap_path = NodePath("TileMap/Interactable")
 
@@ -120,12 +112,12 @@ ten zły ziomo
 co dropnie runki
 do tepowania"
 
-[node name="Player" parent="." instance=ExtResource("2_3agq4")]
-position = Vector2(730, 185)
-
 [node name="ResourceGatherer" type="Node" parent="."]
 script = ExtResource("10_e104n")
 player_path = NodePath("../Player")
 grid_manager_path = NodePath("../GridManager")
 tile_size = 16
 spawn_world_drops = false
+
+[node name="Player" parent="." instance=ExtResource("11_bcha8")]
+position = Vector2(794, 182)

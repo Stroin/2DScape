@@ -2,7 +2,7 @@ extends Node2D
 class_name GridManager
 
 # --- exported settings --------------------------------------------------
-@export var cell_size : Vector2i = Vector2i(64, 64)
+@export var cell_size : Vector2i = Vector2i(16, 16)
 @export var collision_container_path: NodePath
 @export var interactable_tilemap_path: NodePath
 

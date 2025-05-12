@@ -17,4 +17,4 @@ skill = "woodcutting"
 required_tool = ExtResource("2_184o3")
 required_level = 0
 tool_durability_cost = 1
-atlas_coords = Vector2i(0, 0)
+atlas_coords = Vector2i(5, 5)

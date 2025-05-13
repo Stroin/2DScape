@@ -15,7 +15,6 @@ grow_vertical = 2
 script = ExtResource("1_lpn7m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 offset_right = 40.0
@@ -41,7 +40,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 16
 
 [node name="Inventory" type="Panel" parent="CanvasLayer"]
-visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

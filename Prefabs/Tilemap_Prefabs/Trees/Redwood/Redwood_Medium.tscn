@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://2kvvbekasuth"]
 
 [ext_resource type="Script" path="res://Scripts/Interactable.gd" id="1_dvepd"]
-[ext_resource type="Resource" uid="uid://iyafkhms66jf" path="res://Prefabs/Resources/Logs/oak_log_resource.tres" id="2_xn01r"]
+[ext_resource type="Resource" uid="uid://luwm6liimlgr" path="res://Prefabs/Resources/Logs/redwood_log_resource.tres" id="2_jyya7"]
 [ext_resource type="Texture2D" uid="uid://b1b7oe482hjuk" path="res://Assets/Environment/Props/Static/Trees/Model_01/Size_03.png" id="3_7g44r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thrd6"]
@@ -9,12 +9,12 @@ size = Vector2(48, 96)
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_dvepd")
-resource_data = ExtResource("2_xn01r")
+resource_data = ExtResource("2_jyya7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_7g44r")
 region_enabled = true
-region_rect = Rect2(0, 0, 48, 96)
+region_rect = Rect2(0, 96, 48, 96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_thrd6")

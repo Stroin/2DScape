@@ -1,3 +1,4 @@
+# res://Scripts/CraftingUI.gd
 extends Control
 class_name CraftingUI
 
@@ -16,7 +17,7 @@ var current_station: String     = ""
 
 func _ready() -> void:
 	panel.visible = false
-	pc.connect("interact_requested", Callable(self, "_on_interact"))
+	pc.connect("interact_requested", Callable(self, "_on_pc_interact"))
 	craft_button.connect("pressed", Callable(self, "_on_craft_pressed"))
 	close_button.connect("pressed", Callable(self, "_on_close_pressed"))
 	if player:
@@ -24,8 +25,11 @@ func _ready() -> void:
 	else:
 		push_warning("CraftingUI: player not found")
 
-func _on_interact(station: String, _cell) -> void:
-	current_station = station
+func _on_pc_interact(interactable: Interactable, _cell: Vector2i) -> void:
+	# only respond to crafting tables
+	if interactable.interactable_type != "crafting_table":
+		return
+	current_station = interactable.interactable_type
 	panel.visible = true
 	pc.set_process_input(false)
 	_refresh_list()

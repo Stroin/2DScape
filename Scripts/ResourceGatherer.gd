@@ -1,35 +1,33 @@
+# res://Scripts/ResourceGatherer.gd
 extends Node
 class_name ResourceGatherer
 
-@export var player_path       : NodePath
-@export var grid_manager_path : NodePath
-@export var tile_size         : int    = 64
-@export var spawn_world_drops : bool   = true
+@export var player_path                    : NodePath
+@export var grid_manager_path              : NodePath
+@export var pathfinding_controller_path    : NodePath
+@export var tile_size                      : int    = 64
+@export var spawn_world_drops              : bool   = true
 
 var gather_cancelled: bool = false
 var is_gathering:    bool = false
 
-const TileQueries = preload("res://Scripts/TileQueries.gd")
-@onready var player             : PlayerMovement    = get_node(player_path)
-@onready var grid_manager       : GridManager       = get_node(grid_manager_path)
-@onready var durability_manager : DurabilityManager = get_node("/root/DurabilityManage")
+@onready var player             : PlayerMovement        = get_node(player_path)
+@onready var grid_manager       : GridManager           = get_node(grid_manager_path)
+@onready var durability_manager : DurabilityManager     = get_node("/root/DurabilityManage")
+@onready var pc                 : PathfindingController = get_node(pathfinding_controller_path)
 
 func _ready() -> void:
-	player.gather_requested.connect(_on_gather_requested)
-	player.movement_started.connect(_on_player_moved)
+	pc.connect("interact_requested", Callable(self, "_on_pc_interact"))
+	player.movement_started.connect(Callable(self, "_on_player_moved"))
 
-func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
+func _on_pc_interact(interactable: Interactable, cell: Vector2i) -> void:
 	if is_gathering:
 		return
 
-	var info = TileQueries.get_resource_data_from_ray(ray)
-	if info.is_empty():
+	var res: ResourceData = interactable.resource_data
+	if not res:
 		print("ResourceGatherer: nothing to gather at", cell)
 		return
-
-	var res   : ResourceData  = info["resource"]
-	var tcell : Vector2i      = info["cell"]
-	var tm    : TileMapLayer  = info["tilemap"]
 
 	# --- find a qualifying tool of sufficient tier ---
 	var use_tool_id: String = ""
@@ -66,15 +64,11 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	if use_tool_id != "":
 		durability_manager.reduce_durability(use_tool_id, res.tool_durability_cost)
 
-	# --- swap tile & disable A* solidity ---
-	var src_id = tm.get_cell_source_id(tcell)
-	var old_at = tm.get_cell_atlas_coords(tcell)
-	tm.set_cell(tcell, src_id, res.atlas_coords)
-	tm.update_internals()
-	grid_manager.astar_grid.set_point_solid(tcell, false)
-
-	grid_manager.schedule_respawn(tcell, src_id, old_at, res.respawn_time)
-	_start_respawn_countdown(tcell, res.respawn_time)
+	# --- hide the resource instance and schedule respawn ---
+	interactable.hide()
+	get_tree().create_timer(res.respawn_time).timeout.connect(
+		Callable(self, "_on_respawn_timeout").bind(interactable)
+	)
 
 	# --- add drop to inventory ---
 	if res.drop_item:
@@ -89,14 +83,17 @@ func _on_gather_requested(cell: Vector2i, ray: RayCast2D) -> void:
 	# --- optional world‐drop spawn ---
 	if spawn_world_drops and res.drop_scene:
 		var drop = res.drop_scene.instantiate()
-		drop.global_position = tm.to_global(tm.map_to_local(tcell)) + Vector2.ONE * tile_size * 0.5
-		tm.get_parent().add_child(drop)
+		drop.global_position = interactable.global_position + Vector2.ONE * tile_size * 0.5
+		interactable.get_parent().add_child(drop)
 
 	is_gathering = false
 
 func _on_player_moved() -> void:
 	gather_cancelled = true
 	is_gathering    = false
+
+func _on_respawn_timeout(interactable: Interactable) -> void:
+	interactable.show()
 
 func _start_respawn_countdown(cell: Vector2i, duration: float) -> void:
 	var lbl = Label.new()

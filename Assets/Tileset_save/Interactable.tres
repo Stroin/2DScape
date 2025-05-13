@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://rld7l7ne0csn"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://rld7l7ne0csn"]
 
 [ext_resource type="Texture2D" uid="uid://cgcom6l54hhkk" path="res://Assets/Stroinkowe/Trees_01.png" id="1_r1pkr"]
 [ext_resource type="Texture2D" uid="uid://bpt2ham4dlml7" path="res://Assets/Stroinkowe/Trees_02.png" id="2_8tt3d"]
 [ext_resource type="Texture2D" uid="uid://dtjwkb5k3kjvy" path="res://Assets/Stroinkowe/Buildings.png" id="3_2wwvx"]
+[ext_resource type="PackedScene" uid="uid://4qk6464xpr2c" path="res://Tile_Prefab.tscn" id="4_s0cin"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lj8n1"]
 texture = ExtResource("1_r1pkr")
@@ -20,7 +21,7 @@ texture = ExtResource("1_r1pkr")
 21:0/0/texture_origin = Vector2i(0, 58)
 0:10/size_in_atlas = Vector2i(7, 10)
 0:10/0 = 0
-0:10/0/texture_origin = Vector2i(0, 58)
+0:10/0/texture_origin = Vector2i(0, 60)
 7:10/size_in_atlas = Vector2i(7, 10)
 7:10/0 = 0
 7:10/0/texture_origin = Vector2i(0, 58)
@@ -2315,6 +2316,10 @@ texture = ExtResource("3_2wwvx")
 66:45/0 = 0
 67:45/0 = 0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_htir4"]
+resource_name = "Tree_Test"
+scenes/1/scene = ExtResource("4_s0cin")
+
 [resource]
 physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "resource_type"
@@ -2324,3 +2329,4 @@ custom_data_layer_1/type = 4
 sources/0 = SubResource("TileSetAtlasSource_lj8n1")
 sources/1 = SubResource("TileSetAtlasSource_i5qpv")
 sources/2 = SubResource("TileSetAtlasSource_rkbd1")
+sources/4 = SubResource("TileSetScenesCollectionSource_htir4")

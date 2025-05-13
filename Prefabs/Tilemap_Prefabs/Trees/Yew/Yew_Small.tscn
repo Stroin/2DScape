@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp5mlo3134jo8"]
+
+[ext_resource type="Script" path="res://Scripts/Interactable.gd" id="1_vlran"]
+[ext_resource type="Resource" uid="uid://iyafkhms66jf" path="res://Prefabs/Resources/Logs/oak_log_resource.tres" id="2_kvi14"]
+[ext_resource type="Texture2D" uid="uid://dj5dfsqkdrswh" path="res://Assets/Environment/Props/Static/Trees/Model_01/Size_02.png" id="3_7q12e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thrd6"]
+size = Vector2(32, 64)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_vlran")
+resource_data = ExtResource("2_kvi14")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_7q12e")
+region_enabled = true
+region_rect = Rect2(96, 64, 32, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_thrd6")

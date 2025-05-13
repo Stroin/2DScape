@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cgcom6l54hhkk" path="res://Assets/Stroinkowe/Trees_01.png" id="1_r1pkr"]
 [ext_resource type="Texture2D" uid="uid://bpt2ham4dlml7" path="res://Assets/Stroinkowe/Trees_02.png" id="2_8tt3d"]
 [ext_resource type="Texture2D" uid="uid://dtjwkb5k3kjvy" path="res://Assets/Stroinkowe/Buildings.png" id="3_2wwvx"]
-[ext_resource type="PackedScene" uid="uid://4qk6464xpr2c" path="res://Oak_Log.tscn" id="4_gqj6x"]
-[ext_resource type="PackedScene" uid="uid://bgmlhn3vw0inu" path="res://crafting_table.tscn" id="5_yso0e"]
+[ext_resource type="PackedScene" uid="uid://4qk6464xpr2c" path="res://Prefabs/Tilemap_Prefabs/Testing/Oak_Log.tscn" id="4_haroo"]
+[ext_resource type="PackedScene" uid="uid://bgmlhn3vw0inu" path="res://Prefabs/Tilemap_Prefabs/Testing/crafting_table.tscn" id="5_xyk02"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lj8n1"]
 texture = ExtResource("1_r1pkr")
@@ -2319,8 +2319,8 @@ texture = ExtResource("3_2wwvx")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_htir4"]
 resource_name = "Tree_Test"
-scenes/1/scene = ExtResource("4_gqj6x")
-scenes/2/scene = ExtResource("5_yso0e")
+scenes/1/scene = ExtResource("4_haroo")
+scenes/2/scene = ExtResource("5_xyk02")
 
 [resource]
 physics_layer_0/collision_layer = 1

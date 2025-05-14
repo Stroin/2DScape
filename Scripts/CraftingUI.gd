@@ -46,13 +46,29 @@ func _refresh_list() -> void:
 	# clear old buttons
 	for child in list_vbox.get_children():
 		child.queue_free()
-	# add one button per RecipeData for this station
-	for r in RecipeManager.get_recipes_for_station(current_station):
+	# fetch, sort (craftable first, then name), and add one button per RecipeData
+	var recipes = RecipeManager.get_recipes_for_station(current_station)
+	recipes.sort_custom(Callable(self, "_compare_recipes"))
+	for r in recipes:
 		var btn = Button.new()
 		btn.text = r.output_item.display_name
 		btn.name = r.output_item.id
+		# visually gray out uncraftable recipes, but keep them enabled
+		if not RecipeManager.can_craft(r):
+			btn.modulate = Color(0.5, 0.5, 0.5)
 		list_vbox.add_child(btn)
 		btn.connect("pressed", Callable(self, "_on_select").bind(r))
+
+func _compare_recipes(a: RecipeData, b: RecipeData) -> bool:
+	# craftable recipes first
+	var can_a = RecipeManager.can_craft(a)
+	var can_b = RecipeManager.can_craft(b)
+	if can_a and not can_b:
+		return true
+	elif not can_a and can_b:
+		return false
+	# then alphabetical by display name
+	return a.output_item.display_name < b.output_item.display_name
 
 func _on_select(r: RecipeData) -> void:
 	selected_recipe = r

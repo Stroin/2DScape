@@ -26,10 +26,12 @@ func _ready() -> void:
 		push_warning("CraftingUI: player not found")
 
 func _on_pc_interact(interactable: Interactable, _cell: Vector2i) -> void:
-	# only respond to crafting tables
-	if interactable.interactable_type != "crafting_table":
+	# only respond if there are recipes for this station
+	var st = interactable.interactable_type
+	var available = RecipeManager.get_recipes_for_station(st)
+	if available.size() == 0:
 		return
-	current_station = interactable.interactable_type
+	current_station = st
 	panel.visible = true
 	pc.set_process_input(false)
 	_refresh_list()
@@ -46,13 +48,36 @@ func _refresh_list() -> void:
 	# clear old buttons
 	for child in list_vbox.get_children():
 		child.queue_free()
-	# add one button per RecipeData for this station
-	for r in RecipeManager.get_recipes_for_station(current_station):
+	# fetch, sort (craftable first, then name), and add one button per RecipeData
+	var recipes = RecipeManager.get_recipes_for_station(current_station)
+	recipes.sort_custom(Callable(self, "_compare_recipes"))
+	for r in recipes:
 		var btn = Button.new()
 		btn.text = r.output_item.display_name
 		btn.name = r.output_item.id
+		# visually gray out uncraftable recipes, but keep them enabled
+		if not RecipeManager.can_craft(r):
+			btn.modulate = Color(0.5, 0.5, 0.5)
 		list_vbox.add_child(btn)
 		btn.connect("pressed", Callable(self, "_on_select").bind(r))
+
+func _compare_recipes(a: RecipeData, b: RecipeData) -> bool:
+	# craftable recipes first
+	var can_a = RecipeManager.can_craft(a)
+	var can_b = RecipeManager.can_craft(b)
+	if can_a and not can_b:
+		return true
+	elif not can_a and can_b:
+		return false
+	# then group by item “type” (suffix) so similar tools cluster
+	var a_parts = a.output_item.display_name.split(" ")
+	var b_parts = b.output_item.display_name.split(" ")
+	var a_suffix = a_parts[a_parts.size() - 1]
+	var b_suffix = b_parts[b_parts.size() - 1]
+	if a_suffix != b_suffix:
+		return a_suffix < b_suffix
+	# finally alphabetical by full name
+	return a.output_item.display_name < b.output_item.display_name
 
 func _on_select(r: RecipeData) -> void:
 	selected_recipe = r
@@ -72,6 +97,7 @@ func _on_craft_pressed() -> void:
 	if selected_recipe == null:
 		return
 	if RecipeManager.craft(selected_recipe):
-		_on_close_pressed()
+		# UI stays open after crafting
+		_refresh_list()
 	else:
 		details_label.text = "Cannot craft: check ingredients & skill"

@@ -1,5 +1,3 @@
-# res://Scripts/DebugGrid.gd
-
 extends Node2D
 class_name DebugGrid
 
@@ -10,6 +8,7 @@ class_name DebugGrid
 var grid_size   : Vector2i
 var cell_size   : Vector2i
 var origin_cell : Vector2i
+@export_range(0.0, 1.0, 0.01) var line_opacity: float = 1.0
 
 func _ready() -> void:
 	var gm := get_node(grid_manager_path)
@@ -40,7 +39,7 @@ func _draw() -> void:
 		draw_line(
 			Vector2(x * cell_size.x, 0),
 			Vector2(x * cell_size.x, grid_size.y * cell_size.y),
-			Color(0.4, 0.4, 0.4),
+			Color(0, 0, 0, line_opacity),
 			1
 		)
 
@@ -49,6 +48,6 @@ func _draw() -> void:
 		draw_line(
 			Vector2(0, y * cell_size.y),
 			Vector2(grid_size.x * cell_size.x, y * cell_size.y),
-			Color(0.4, 0.4, 0.4),
+			Color(0, 0, 0, line_opacity),
 			1
 		)

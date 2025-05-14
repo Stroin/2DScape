@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy2brghcxk8jw"]
+[gd_scene load_steps=6 format=3 uid="uid://dy2brghcxk8jw"]
 
 [ext_resource type="Script" path="res://Scripts/Interactable.gd" id="1_utd0m"]
 [ext_resource type="Resource" uid="uid://cijdp08obseva" path="res://Prefabs/Resources/Logs/maple_log_resource.tres" id="2_dbjj8"]
+[ext_resource type="Texture2D" uid="uid://pkevpqecjxv3" path="res://Assets/Environment/Props/Static/Shadows.png" id="3_lbs62"]
 [ext_resource type="Texture2D" uid="uid://de3vm851m7d87" path="res://Assets/Environment/Props/Static/Trees/Model_01/Size_05.png" id="3_levnd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thrd6"]
@@ -10,6 +11,12 @@ size = Vector2(108, 160)
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_utd0m")
 resource_data = ExtResource("2_dbjj8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-2, 72)
+texture = ExtResource("3_lbs62")
+region_enabled = true
+region_rect = Rect2(112, 0, 112, 48)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_levnd")

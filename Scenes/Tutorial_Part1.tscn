@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://byhyb2px4bjme"]
+[gd_scene load_steps=14 format=4 uid="uid://byhyb2px4bjme"]
 
 [ext_resource type="PackedScene" uid="uid://b7i335316ahtm" path="res://Scenes/InventoryUI.tscn" id="1_fbtli"]
 [ext_resource type="Script" path="res://Scripts/GridManager.gd" id="2_2qx5a"]
@@ -10,7 +10,6 @@
 [ext_resource type="TileSet" uid="uid://rld7l7ne0csn" path="res://Assets/Tileset_save/Interactable.tres" id="6_iq4fj"]
 [ext_resource type="Script" path="res://Scripts/DebugGrid.gd" id="7_bk6tr"]
 [ext_resource type="Script" path="res://Scripts/PathfindingController.gd" id="8_sbq4y"]
-[ext_resource type="PackedScene" uid="uid://bgmlhn3vw0inu" path="res://Prefabs/Tilemap_Prefabs/Testing/crafting_table.tscn" id="9_d8bp0"]
 [ext_resource type="PackedScene" uid="uid://gviv553ix32b" path="res://Prefabs/pickup.tscn" id="10_1mo07"]
 [ext_resource type="Script" path="res://Scripts/ResourceGatherer.gd" id="10_e104n"]
 [ext_resource type="PackedScene" uid="uid://bkpqqthrusru4" path="res://Prefabs/Player.tscn" id="11_bcha8"]
@@ -21,6 +20,9 @@
 
 [node name="Control2" parent="." instance=ExtResource("2_ma6cy")]
 pathfinding_controller_path = NodePath("../PathfindingController")
+
+[node name="CanvasLayer" parent="Control2" index="0"]
+visible = false
 
 [node name="Control3" parent="." instance=ExtResource("3_yg1yb")]
 
@@ -73,9 +75,6 @@ tile_set = ExtResource("5_a1015")
 z_index = -1
 tile_map_data = PackedByteArray("AAAVAA4ABAAAAAAAAgAXABYABAAAAAAAAgAYAB8ABAAAAAAAAgAYAP7/BAAAAAAAAgA8AP3/BAAAAAAAAgA5AB4ABAAAAAAAAgBBABsABAAAAAAAAgAZAAgABAAAAAAAAwAdABsABAAAAAAAAwBBAAMABAAAAAAAAwAaABYABAAAAAAAAQAZABEABAAAAAAAAQATABMABAAAAAAAAQAVABwABAAAAAAAAQAcACIABAAAAAAAAQA8AB8ABAAAAAAAAQA+ABsABAAAAAAAAQBEABgABAAAAAAAAQBFAAYABAAAAAAAAQA8AAMABAAAAAAAAQAcAPv/BAAAAAAAAQAbAAEABAAAAAAAAQAPAPv/BAAAAAAABAAfAO//BAAAAAAABABCAPL/BAAAAAAABABNAAMABAAAAAAABABOACIABAAAAAAABAA6ACsABAAAAAAABAAWAC0ABAAAAAAABAADABwABAAAAAAABAAPACEABAAAAAAAAwAKABcABAAAAAAAAwAOAA4ABAAAAAAAAwAEAA4ABAAAAAAAAwAEAAEABAAAAAAAAwAGAPb/BAAAAAAAAwAOAO7/BAAAAAAAAwAWAPH/BAAAAAAAAwApAOv/BAAAAAAAAwAyAPD/BAAAAAAAAwA7AOv/BAAAAAAAAwBLAPD/BAAAAAAAAwBRAPf/BAAAAAAAAwBYAAMABAAAAAAAAwBVAA0ABAAAAAAAAwBXABsABAAAAAAAAwBUACUABAAAAAAAAwBMAC0ABAAAAAAAAwBEACkABAAAAAAAAwAvADAABAAAAAAAAwAlACwABAAAAAAAAwAJAC4ABAAAAAAAAwAPACoABAAAAAAAAgAfACsABAAAAAAAAgAqACoABAAAAAAAAgAzACkABAAAAAAAAgA/ACUABAAAAAAAAgBGACIABAAAAAAAAgBKABoABAAAAAAAAgBSAAQABAAAAAAAAgBGAPz/BAAAAAAAAgBLAPn/BAAAAAAAAgA7APT/BAAAAAAAAgAsAPL/BAAAAAAAAgAlAPL/BAAAAAAAAgAJAAEABAAAAAAAAgAJAAwABAAAAAAAAgAQABcABAAAAAAAAgAKACIABAAAAAAAAgAUACUABAAAAAAAAQAaACYABAAAAAAAAQAuACgABAAAAAAAAQBJABQABAAAAAAAAQBQABkABAAAAAAAAQBIAAIABAAAAAAAAQBTAP7/BAAAAAAAAQBCAPr/BAAAAAAAAQBIAPb/BAAAAAAAAQA3APP/BAAAAAAAAQAVAPj/BAAAAAAAAQAKAPv/BAAAAAAAAQAHAAcABAAAAAAAAQADABUABAAAAAAAAQA=")
 tile_set = ExtResource("6_iq4fj")
-
-[node name="Area2D" parent="GridManager/TileMap" instance=ExtResource("9_d8bp0")]
-position = Vector2(702, 171)
 
 [node name="DebugGrid" type="Node2D" parent="."]
 script = ExtResource("7_bk6tr")
@@ -141,3 +140,7 @@ position = Vector2(794, 182)
 [node name="Area2D" parent="." instance=ExtResource("10_1mo07")]
 position = Vector2(851, 180)
 scale = Vector2(0.08, 0.08)
+
+[editable path="Control"]
+[editable path="Control2"]
+[editable path="Control3"]

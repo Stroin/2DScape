@@ -67,7 +67,14 @@ func _compare_recipes(a: RecipeData, b: RecipeData) -> bool:
 		return true
 	elif not can_a and can_b:
 		return false
-	# then alphabetical by display name
+	# then group by item “type” (suffix) so similar tools cluster
+	var a_parts = a.output_item.display_name.split(" ")
+	var b_parts = b.output_item.display_name.split(" ")
+	var a_suffix = a_parts[a_parts.size() - 1]
+	var b_suffix = b_parts[b_parts.size() - 1]
+	if a_suffix != b_suffix:
+		return a_suffix < b_suffix
+	# finally alphabetical by full name
 	return a.output_item.display_name < b.output_item.display_name
 
 func _on_select(r: RecipeData) -> void:
@@ -88,6 +95,7 @@ func _on_craft_pressed() -> void:
 	if selected_recipe == null:
 		return
 	if RecipeManager.craft(selected_recipe):
-		_on_close_pressed()
+		# UI stays open after crafting
+		_refresh_list()
 	else:
 		details_label.text = "Cannot craft: check ingredients & skill"

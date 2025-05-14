@@ -74,9 +74,9 @@ tile_map_data = PackedByteArray("AAAVAA4ABAAAAAAAAgAXABYABAAAAAAAAgAYAB8ABAAAAAA
 tile_set = ExtResource("6_iq4fj")
 
 [node name="DebugGrid" type="Node2D" parent="."]
-visible = false
 script = ExtResource("7_bk6tr")
 grid_manager_path = NodePath("../GridManager")
+line_opacity = 0.1
 
 [node name="PathfindingController" type="Node2D" parent="."]
 script = ExtResource("8_sbq4y")

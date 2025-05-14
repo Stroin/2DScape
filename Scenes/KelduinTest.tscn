@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bux7p80f8n20h"]
+[gd_scene load_steps=17 format=4 uid="uid://bux7p80f8n20h"]
 
 [ext_resource type="PackedScene" uid="uid://b7i335316ahtm" path="res://Scenes/InventoryUI.tscn" id="1_ohcpo"]
 [ext_resource type="PackedScene" uid="uid://dsmvm0ril0ns6" path="res://Scenes/CraftingUI.tscn" id="2_6chl8"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://bkpqqthrusru4" path="res://Prefabs/Player.tscn" id="12_ylla6"]
 [ext_resource type="PackedScene" uid="uid://gviv553ix32b" path="res://Prefabs/pickup.tscn" id="13_0b8gy"]
 [ext_resource type="PackedScene" uid="uid://bgmlhn3vw0inu" path="res://Prefabs/Tilemap_Prefabs/Testing/crafting_table.tscn" id="14_st4nb"]
+[ext_resource type="PackedScene" uid="uid://bvb25haekefwf" path="res://Prefabs/Tilemap_Prefabs/Testing/campfire.tscn" id="15_ssxl0"]
+[ext_resource type="PackedScene" uid="uid://biqoo37h2t121" path="res://Prefabs/Tilemap_Prefabs/Testing/anvil.tscn" id="16_fsqoy"]
 
 [node name="Tutorial_Part2" type="Node2D"]
 
@@ -21,6 +23,15 @@
 
 [node name="CanvasLayer" parent="Control" index="0"]
 visible = true
+
+[node name="Inventory" parent="Control/CanvasLayer" index="1"]
+visible = false
+
+[node name="Skills" parent="Control/CanvasLayer" index="2"]
+visible = false
+
+[node name="Navigation" parent="Control/CanvasLayer" index="3"]
+visible = false
 
 [node name="Control2" parent="." instance=ExtResource("2_6chl8")]
 pathfinding_controller_path = NodePath("../PathfindingController")
@@ -147,6 +158,12 @@ scale = Vector2(0.08, 0.08)
 
 [node name="Area2D2" parent="." instance=ExtResource("14_st4nb")]
 position = Vector2(878, 316)
+
+[node name="Area2D3" parent="." instance=ExtResource("15_ssxl0")]
+position = Vector2(929, 310)
+
+[node name="Area2D4" parent="." instance=ExtResource("16_fsqoy")]
+position = Vector2(990, 315)
 
 [editable path="Control"]
 [editable path="Control2"]

@@ -26,10 +26,12 @@ func _ready() -> void:
 		push_warning("CraftingUI: player not found")
 
 func _on_pc_interact(interactable: Interactable, _cell: Vector2i) -> void:
-	# only respond to crafting tables
-	if interactable.interactable_type != "crafting_table":
+	# only respond if there are recipes for this station
+	var st = interactable.interactable_type
+	var available = RecipeManager.get_recipes_for_station(st)
+	if available.size() == 0:
 		return
-	current_station = interactable.interactable_type
+	current_station = st
 	panel.visible = true
 	pc.set_process_input(false)
 	_refresh_list()

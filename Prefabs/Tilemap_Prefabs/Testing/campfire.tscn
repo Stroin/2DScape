@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvb25haekefwf"]
+
+[ext_resource type="Script" path="res://Scripts/Interactable.gd" id="1_88uwo"]
+[ext_resource type="Texture2D" uid="uid://bt1otvdxcr1sa" path="res://Assets/Environment/Structures/Stations/Cooking Station/Cooking Station.png" id="2_1ptve"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1aal"]
+size = Vector2(32, 48)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_88uwo")
+interactable_type = "campfire"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1ptve")
+region_enabled = true
+region_rect = Rect2(80, 80, 32, 48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_q1aal")

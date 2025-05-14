@@ -135,4 +135,5 @@ spawn_world_drops = false
 position = Vector2(794, 182)
 
 [node name="Area2D" parent="." instance=ExtResource("10_1mo07")]
-position = Vector2(976, 226)
+position = Vector2(851, 180)
+scale = Vector2(0.08, 0.08)

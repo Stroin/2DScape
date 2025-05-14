@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2s6wvvmkx38l"]
+[gd_scene load_steps=6 format=3 uid="uid://c2s6wvvmkx38l"]
 
 [ext_resource type="Script" path="res://Scripts/Interactable.gd" id="1_6crmv"]
 [ext_resource type="Resource" uid="uid://luwm6liimlgr" path="res://Prefabs/Resources/Logs/redwood_log_resource.tres" id="2_thny3"]
 [ext_resource type="Texture2D" uid="uid://dj5dfsqkdrswh" path="res://Assets/Environment/Props/Static/Trees/Model_01/Size_02.png" id="3_5yu4l"]
+[ext_resource type="Texture2D" uid="uid://pkevpqecjxv3" path="res://Assets/Environment/Props/Static/Shadows.png" id="3_spevj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thrd6"]
 size = Vector2(32, 64)
@@ -10,6 +11,13 @@ size = Vector2(32, 64)
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_6crmv")
 resource_data = ExtResource("2_thny3")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, 31)
+scale = Vector2(0.659135, 1)
+texture = ExtResource("3_spevj")
+region_enabled = true
+region_rect = Rect2(112, 80, 48, 16)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_5yu4l")

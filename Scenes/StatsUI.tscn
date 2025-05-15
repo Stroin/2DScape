@@ -28,7 +28,6 @@ grow_vertical = 2
 script = ExtResource("1_otp4e")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 script = SubResource("GDScript_1prtv")
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]

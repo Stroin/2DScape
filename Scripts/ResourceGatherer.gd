@@ -1,4 +1,3 @@
-# res://Scripts/ResourceGatherer.gd
 extends Node
 class_name ResourceGatherer
 
@@ -66,6 +65,12 @@ func _on_pc_interact(interactable: Interactable, cell: Vector2i) -> void:
 
 	# --- hide the resource instance and schedule respawn ---
 	interactable.hide()
+	var shape = interactable.get_node_or_null("CollisionShape2D")
+	if shape:
+		shape.disabled = true
+	interactable.set_process(false)
+	interactable.set_physics_process(false)
+
 	get_tree().create_timer(res.respawn_time).timeout.connect(
 		Callable(self, "_on_respawn_timeout").bind(interactable)
 	)
@@ -93,6 +98,11 @@ func _on_player_moved() -> void:
 	is_gathering    = false
 
 func _on_respawn_timeout(interactable: Interactable) -> void:
+	var shape = interactable.get_node_or_null("CollisionShape2D")
+	if shape:
+		shape.disabled = false
+	interactable.set_process(true)
+	interactable.set_physics_process(true)
 	interactable.show()
 
 func _start_respawn_countdown(cell: Vector2i, duration: float) -> void:

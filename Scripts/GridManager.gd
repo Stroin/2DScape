@@ -102,6 +102,9 @@ func initialize_grid() -> void:
 
 	# 3) mark interactable prefabs as solid so A* routes around them
 	for interactable in get_tree().get_nodes_in_group("interactable"):
+		# skip any that have been hidden/gathered
+		if not interactable.is_visible_in_tree():
+			continue
 		var shape_node = interactable.get_node_or_null("CollisionShape2D")
 		if shape_node and shape_node.shape:
 			# get local AABB of the shape...

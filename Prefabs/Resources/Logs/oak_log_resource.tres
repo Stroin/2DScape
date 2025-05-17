@@ -8,7 +8,7 @@
 script = ExtResource("1_epwta")
 id = "oak_log"
 display_name = "Oak Log"
-gather_time = 1.0
+gather_time = 5.0
 drop_item = ExtResource("1_nocqx")
 drop_amount = 1
 respawn_time = 10.0

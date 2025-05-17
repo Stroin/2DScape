@@ -28,7 +28,6 @@ func _on_pc_interact(interactable: Interactable, cell: Vector2i) -> void:
 		print("ResourceGatherer: nothing to gather at", cell)
 		return
 
-	# --- find a qualifying tool of sufficient tier ---
 	var use_tool_id: String = ""
 	if res.required_tool:
 		var req_tier = res.required_tool.tier
@@ -43,7 +42,6 @@ func _on_pc_interact(interactable: Interactable, cell: Vector2i) -> void:
 			print("ResourceGatherer: Need ", res.required_tool.display_name, " or better to gather!")
 			return
 
-	# --- skill requirement check ---
 	if res.required_level > 0 and Stats.get_level(res.skill) < res.required_level:
 		print("ResourceGatherer: You need %s level %d to gather!" %
 			  [res.skill.capitalize(), res.required_level])
@@ -52,18 +50,17 @@ func _on_pc_interact(interactable: Interactable, cell: Vector2i) -> void:
 	gather_cancelled = false
 	is_gathering    = true
 
-	await get_tree().create_timer(res.gather_time).timeout
+	await player.play_gather_animation_for(res.gather_time)
+
 	if gather_cancelled:
 		print("ResourceGatherer: gathering cancelled")
 		is_gathering     = false
 		gather_cancelled = false
 		return
 
-	# --- drain chosen tool’s durability ---
 	if use_tool_id != "":
 		durability_manager.reduce_durability(use_tool_id, res.tool_durability_cost)
 
-	# --- hide the resource instance and schedule respawn ---
 	interactable.hide()
 	var shape = interactable.get_node_or_null("CollisionShape2D")
 	if shape:
@@ -76,17 +73,14 @@ func _on_pc_interact(interactable: Interactable, cell: Vector2i) -> void:
 		Callable(self, "_on_respawn_timeout").bind(interactable)
 	)
 
-	# --- add drop to inventory ---
 	if res.drop_item:
 		Inv.add_item(res.drop_item.id, res.drop_amount)
 	else:
 		push_warning("ResourceGatherer: no drop_item set for %s" % res.id)
 
-	# --- grant XP ---
 	if res.skill != "":
 		Stats.add_xp(res.skill, res.xp_reward)
 
-	# --- optional world‐drop spawn ---
 	if spawn_world_drops and res.drop_scene:
 		var drop = res.drop_scene.instantiate()
 		drop.global_position = interactable.global_position + Vector2.ONE * tile_size * 0.5

@@ -100,6 +100,41 @@ func initialize_grid() -> void:
 			if space.intersect_point(query).size() > 0:
 				astar_grid.set_point_solid(cell, true)
 
+	# 3) mark interactable prefabs as solid so A* routes around them
+	for interactable in get_tree().get_nodes_in_group("interactable"):
+		var shape_node = interactable.get_node_or_null("CollisionShape2D")
+		if shape_node and shape_node.shape:
+			# get local AABB of the shape...
+			var aabb = shape_node.shape.get_rect()
+			# ...then compute its world-space AABB by transforming each corner
+			var gt = shape_node.get_global_transform()
+			var p0 = gt * aabb.position
+			var p1 = gt * (aabb.position + Vector2(aabb.size.x, 0))
+			var p2 = gt * (aabb.position + Vector2(0, aabb.size.y))
+			var p3 = gt * (aabb.position + aabb.size)
+			var min_x = min(p0.x, p1.x, p2.x, p3.x)
+			var max_x = max(p0.x, p1.x, p2.x, p3.x)
+			var min_y = min(p0.y, p1.y, p2.y, p3.y)
+			var max_y = max(p0.y, p1.y, p2.y, p3.y)
+			var world_aabb = Rect2(
+				Vector2(min_x, min_y),
+				Vector2(max_x - min_x, max_y - min_y)
+			)
+			# compute covered cells
+			var start_cell = Vector2i(
+				int(floor(world_aabb.position.x / cell_size.x)),
+				int(floor(world_aabb.position.y / cell_size.y))
+			)
+			var end_cell = Vector2i(
+				int(floor((world_aabb.position.x + world_aabb.size.x) / cell_size.x)),
+				int(floor((world_aabb.position.y + world_aabb.size.y) / cell_size.y))
+			)
+			for x in range(start_cell.x, end_cell.x + 1):
+				for y in range(start_cell.y, end_cell.y + 1):
+					var cell = Vector2i(x, y)
+					if astar_grid.is_in_boundsv(cell):
+						astar_grid.set_point_solid(cell, true)
+
 	queue_redraw()
 	emit_signal("grid_initialized")
 

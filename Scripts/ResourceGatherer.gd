@@ -70,6 +70,7 @@ func _on_pc_interact(interactable: Interactable, cell: Vector2i) -> void:
 		shape.disabled = true
 	interactable.set_process(false)
 	interactable.set_physics_process(false)
+	grid_manager.initialize_grid()
 
 	get_tree().create_timer(res.respawn_time).timeout.connect(
 		Callable(self, "_on_respawn_timeout").bind(interactable)

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://pkevpqecjxv3" path="res://Assets/Environment/Props/Static/Shadows.png" id="4_3v6cn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thrd6"]
-size = Vector2(80, 128)
+size = Vector2(79.99, 127.99)
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_ppe6s")

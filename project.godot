@@ -11,17 +11,20 @@ config_version=5
 [application]
 
 config/name="2DScape"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.png"
 
 [autoload]
 
+SaveGam="*res://Scripts/SaveGame.gd"
 Inv="*res://Autoloads/inventory.tscn"
 Stats="*res://Autoloads/player_stats.tscn"
 ItemManage="*res://Scripts/ItemManager.gd"
 RecipeManage="*res://Scripts/RecipeManager.gd"
 DurabilityManage="*res://Scripts/DurabilityManager.gd"
 ResourceManage="*res://Scripts/ResourceManager.gd"
+PauseMenu="*res://Scenes/PauseMenu.tscn"
 
 [display]
 

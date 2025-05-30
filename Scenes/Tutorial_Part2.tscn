@@ -18,19 +18,10 @@
 
 [node name="Control" parent="." instance=ExtResource("1_1ja2c")]
 
-[node name="CanvasLayer" parent="Control" index="0"]
-visible = false
-
 [node name="Control2" parent="." instance=ExtResource("2_mfres")]
 pathfinding_controller_path = NodePath("../PathfindingController")
 
-[node name="CanvasLayer" parent="Control2" index="0"]
-visible = false
-
 [node name="Control3" parent="." instance=ExtResource("3_e4p6m")]
-
-[node name="CanvasLayer" parent="Control3" index="0"]
-visible = false
 
 [node name="GridManager" type="Node2D" parent="."]
 position = Vector2(0, -1)
